@@ -28,27 +28,14 @@ Do not copy the `project/` directory into a repository during installation. It i
 
 ### Install from a Git repository with the Skills CLI
 
-If the skills are published in a GitHub repository, install all of them with:
-
 ```bash
-npx skills add OWNER/REPO --all -y
-```
-
-For example:
-
-```bash
-npx skills add challengepost/learn-ai-basics --all -y
+npx skills add Nelenik/dev-skills-pack --all -y
 ```
 
 The `--all` flag installs every skill exposed by the repository. The `-y` flag accepts the installation prompts automatically. To install only selected skills, omit `--all` and pass the requested skill names according to the Skills CLI syntax.
 
 To update the installed skills, run the same command again after the repository has changed:
-
-```bash
-npx skills add OWNER/REPO --all -y
-```
-
-Replace `OWNER/REPO` with the GitHub repository containing this skill set. The repository should expose the skill folders with their `SKILL.md` files; keep the names `1-start`, `2-scope`, `3-prd`, `4-spec`, `5-build`, and `6-plan` unchanged.
+ The repository should expose the skill folders with their `SKILL.md` files; keep the names `1-start`, `2-scope`, `3-prd`, `4-spec`, `5-build`, and `6-plan` unchanged.
 
 ## Start a new project
 
