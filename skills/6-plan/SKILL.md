@@ -1,8 +1,6 @@
 ---
-name: 6-plan
-description: Plan non-trivial features, migrations, refactors, upgrades, and continued development in existing projects.
+description: "Plan non-trivial features, migrations, refactors, upgrades, and continued development in existing projects."
 ---
-
 # 6-plan — Plan the Next Change
 
 Use for features, migrations, upgrades, refactors, integrations, scaling, or other changes needing impact analysis. Read `project/context.md` and inspect code, data, tests, deployment setup, history, and existing plans. If context is missing, use `1-start`.
