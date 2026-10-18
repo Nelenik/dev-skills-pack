@@ -1,4 +1,5 @@
 ---
+name: 5-build
 description: "Implement and verify planned changes in coherent increments, from small fixes through multi-step production work."
 ---
 # 5-build — Implement and Verify

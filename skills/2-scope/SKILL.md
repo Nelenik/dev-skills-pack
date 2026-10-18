@@ -1,4 +1,5 @@
 ---
+name: 2-scope
 description: "Define or reshape product direction, boundaries, outcomes, and priorities for a new or existing project."
 ---
 # 2-scope — Define Direction
@@ -14,5 +15,7 @@ Use answers to ask adaptive follow-ups. Probe vague words such as “simple”, 
 Offer informed tradeoffs when useful, but do not choose product direction on the developer's behalf. Record their intent, decisions, assumptions, and unresolved questions separately.
 
 Write `project/scope.md` with `status: draft`, show consequential decisions, and set `status: approved` after clear approval. Record revisions instead of regenerating the document. Do not force a proof-of-concept boundary; use an appropriate release, milestone, or migration boundary.
+
+Use [templates/scope-template.md](templates/scope-template.md) as the starting structure. Remove irrelevant sections, but do not leave misleading placeholders.
 
 After approval, route user-facing behavior to `3-prd`, architecture or interfaces to `4-spec`, multi-step or risky work to `6-plan`, and a small clear implementation to `5-build`.

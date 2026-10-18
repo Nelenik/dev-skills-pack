@@ -1,4 +1,5 @@
 ---
+name: 3-prd
 description: "Define product behavior, journeys, requirements, acceptance criteria, and edge cases for a product increment."
 ---
 # 3-prd — Product Requirements
@@ -12,6 +13,8 @@ Treat the PRD as an interview, not a transcription task. Before writing requirem
 Clarify the developer's priorities, desired tone and interaction style, important examples, acceptance threshold, and tradeoffs between speed, simplicity, flexibility, automation, and control. Ask which edge cases matter for the first release and which can be deferred. For an existing product, compare current and intended behavior explicitly and identify compatibility expectations.
 
 Do not invent screens, behavior, copy, user roles, or acceptance criteria. Convert the developer's answers into precise requirements, while labeling agent-derived assumptions and asking about consequential gaps.
+
+Read [references/prd-guide.md](references/prd-guide.md) for interview and edge-case guidance. Use [templates/prd-template.md](templates/prd-template.md) when creating or restructuring `project/prd.md`.
 
 Specify target users, journey, interfaces, behaviors, permissions, data visible to users, loading/empty/error states, acceptance criteria, operational needs, and deferred work.
 

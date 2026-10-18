@@ -1,4 +1,5 @@
 ---
+name: 6-plan
 description: "Plan non-trivial features, migrations, refactors, upgrades, and continued development in existing projects."
 ---
 # 6-plan — Plan the Next Change
