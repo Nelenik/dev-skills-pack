@@ -27,6 +27,42 @@ For planned work, each slice must contain: objective, affected paths/components,
 5. Update the checklist and affected project documents with actual results.
 6. Commit at a stable recovery point when the repository workflow expects commits.
 
+## Engineering quality gate
+
+Apply these rules to new code and to the parts of existing code touched by the change, regardless of language, framework, or application type. Do not preserve a clearly unhealthy structure merely because the requested behavior is small; make the smallest safe refactor needed to keep the design maintainable. Do not perform unrelated broad rewrites.
+
+### General software engineering practices
+
+- Keep each module, class, function, and command focused on one clear responsibility. Separate domain logic, orchestration, I/O, presentation, persistence, and configuration instead of mixing them in one unit.
+- Prefer small, composable units with explicit inputs and outputs. Keep public interfaces narrow and stable; avoid hidden global state, implicit coupling, unnecessary inheritance, and abstractions that do not remove real duplication or complexity.
+- Organize code by feature or domain boundary when that makes ownership and change impact clearer. Avoid dumping grounds such as generic `utils`, `helpers`, `common`, or `misc` modules; name modules after the behavior or domain they own.
+- Treat large or difficult-to-review files as decomposition signals. Roughly 200–300 lines for a module or class, deeply nested control flow, many parameters, repeated branches, or several unrelated responsibilities should trigger a refactoring review. These are review signals, not absolute limits.
+- Keep side effects at explicit boundaries. Isolate network, filesystem, database, process, time, randomness, and external-service access from pure logic so behavior can be tested deterministically.
+- Make failure behavior deliberate: validate inputs at boundaries, preserve useful error context, use typed or structured errors where appropriate, and handle retries, timeouts, cancellation, partial failure, and cleanup according to the operation's risk.
+- Avoid duplicated sources of truth and derived state that can drift. Define ownership, invariants, lifecycle, and concurrency assumptions for shared state and resources.
+- Prefer clear, boring code over clever code. Optimize only where evidence supports it, and document non-obvious trade-offs, invariants, security assumptions, and compatibility constraints near the code.
+- Add focused tests for business rules, edge cases, failure paths, and public contracts. Keep tests independent, deterministic, and proportional to risk; do not weaken production design merely to satisfy brittle tests.
+- Preserve backwards compatibility deliberately. For changed contracts, update consumers, validation, documentation, migrations, observability, and rollback or recovery procedures as applicable.
+- Before completion, inspect changed code for dead paths, accidental scope, leaked secrets, unsafe logging, resource leaks, race conditions, unnecessary work, and missing documentation. Record intentional exceptions and follow-ups in the checklist.
+
+### React and Next.js adaptation
+
+- Keep each component focused on one presentational or domain responsibility. A page may compose several feature components, but it should not also contain all data fetching, form orchestration, transformation, and complex rendering logic.
+- Treat a component as a decomposition signal when it grows beyond roughly 200 lines, contains more than one major visual section, has deeply nested conditionals or JSX, or has several independent stateful concerns. These are review triggers, not absolute limits.
+- Extract repeated or independently understandable UI into named components with explicit props. Prefer composition and small focused components over boolean-prop combinations that create many modes.
+- Move reusable stateful behavior into custom hooks. Keep hooks responsible for state, effects, subscriptions, and event orchestration; keep rendering components responsible for UI. A hook should have a clear purpose and stable input/output contract.
+- Move pure transformations, validation, constants, and domain calculations out of JSX and into appropriately named modules. Keep API/data-access code behind a small service, query, or server-action boundary rather than embedding it throughout the view.
+- Avoid a generic `utils` or `hooks` dumping ground. Place code near its feature and give modules names that describe the behavior they own.
+- Keep state as close as possible to its consumers. Do not lift state or introduce global state unless multiple distant consumers genuinely require the same source of truth. Remove duplicated, derived, and synchronization-prone state.
+- In Next.js, preserve the Server/Client Component boundary deliberately. Use `"use client"` only where browser APIs, interactivity, or client-only hooks require it; do not make an entire page client-rendered to support one small interactive child. Keep secrets and server-only data out of client modules.
+
+### Frontend maintainability and review signals
+
+- Avoid files that mix unrelated concerns. When a file becomes difficult to scan, test, or explain, split it by responsibility even if it is below a line-count threshold.
+- Prefer explicit types, narrow props, predictable data flow, and accessible semantic markup. Do not hide behavior in clever abstractions or premature design-system layers.
+- Add or update focused tests for extracted hooks, non-trivial logic, and important component behavior. Refactoring must preserve existing behavior unless a behavior change is explicitly part of the request.
+- Before completion, inspect changed files for oversized components, duplicated logic, hidden side effects, unnecessary re-renders, missing loading/error/empty states, accessibility regressions, and dead code. Record intentional exceptions and follow-ups in the checklist.
+
 For migrations, verify preconditions, backup/recovery assumptions, idempotency, staged rollout, data validation, and cleanup separately. Never claim a migration or deployment ran when it did not.
 
 If implementation contradicts the plan, inspect downstream impact, update only affected documents, record the reason under `## Revisions`, and seek agreement when user-visible behavior, data safety, compatibility, or architecture changes. Do not use destructive git operations without explicit consent.
