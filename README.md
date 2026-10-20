@@ -13,7 +13,8 @@ skills/
 ├── 3-prd/
 ├── 4-spec/
 ├── 5-build/
-└── 6-plan/
+├── 6-plan/
+└── 7-review/
 ```
 
 The skill folders must contain their `SKILL.md` files. Templates are kept inside the skill that uses them:
@@ -35,7 +36,7 @@ npx skills add Nelenik/dev-skills-pack --all -y
 The `--all` flag installs every skill exposed by the repository. The `-y` flag accepts the installation prompts automatically. To install only selected skills, omit `--all` and pass the requested skill names according to the Skills CLI syntax.
 
 To update the installed skills, run the same command again after the repository has changed:
- The repository should expose the skill folders with their `SKILL.md` files; keep the names `1-start`, `2-scope`, `3-prd`, `4-spec`, `5-build`, and `6-plan` unchanged.
+ The repository should expose the skill folders with their `SKILL.md` files; keep the names `1-start`, `2-scope`, `3-prd`, `4-spec`, `5-build`, `6-plan`, and `7-review` unchanged.
 
 ## Start a new project
 
@@ -74,7 +75,7 @@ Existing behavior is the baseline. Do not rewrite it or recreate documentation u
 The skills are not a one-time tutorial. After the first working version, continue using the same workflow for every meaningful increment:
 
 ```text
-1-start → 2-scope → 3-prd → 4-spec / 6-plan → 5-build
+1-start → 2-scope → 3-prd → 4-spec / 6-plan → 5-build → 7-review
 ```
 
 Not every change needs every step. Small changes can go directly to `5-build`. A complex change may use `6-plan` and `4-spec` together. User-facing requirements belong in `3-prd`; architecture and contracts belong in `4-spec`; sequencing, rollout, migration, and risk management belong in `6-plan`.
