@@ -1,44 +1,44 @@
 # TODO
 
-Отложенные улучшения для повышения качества и практической применимости skill pack.
+Deferred improvements to increase the quality and practical usefulness of the skill pack.
 
-## Приоритетные улучшения
+## Priority improvements
 
-- [ ] Добавить исполняемые критерии завершения для разных типов изменений:
-  - [ ] frontend и UI;
-  - [ ] backend и API;
-  - [ ] базы данных и миграции;
-  - [ ] интеграции и distributed systems;
-  - [ ] CLI, workers и batch jobs;
-  - [ ] security-sensitive изменений;
-  - [ ] deployment и infrastructure.
-- [ ] Связать каждое важное правило с доказательством выполнения: команда, тест, ручная проверка или артефакт.
-- [ ] Добавить в шаблон `checklist.md` раздел с evidence и обязательными quality gates.
-- [ ] Описать матрицу риска для low-, medium- и high-risk изменений и соответствующий уровень проверок.
+- [ ] Add executable completion criteria for different change types:
+  - [ ] frontend and UI;
+  - [ ] backend and API;
+  - [ ] databases and migrations;
+  - [ ] integrations and distributed systems;
+  - [ ] CLI, workers, and batch jobs;
+  - [ ] security-sensitive changes;
+  - [ ] deployment and infrastructure.
+- [ ] Link every important rule to evidence of completion: a command, test, manual check, or artifact.
+- [ ] Add an evidence and mandatory quality gates section to the `checklist.md` template.
+- [ ] Describe a risk matrix for low-, medium-, and high-risk changes and the corresponding level of verification.
 
-## Security и production readiness
+## Security and production readiness
 
-- [ ] Добавить security workflow: threat modeling, trust boundaries, abuse cases и security tests.
-- [ ] Добавить проверки секретов, зависимостей, уязвимостей и unsafe logging.
-- [ ] Описать требования к CI/CD: lint, typecheck, tests, build, migration checks и quality gates.
-- [ ] Добавить рекомендации по rollout strategy, feature flags, canary release и rollback.
-- [ ] Расширить observability-рекомендации: structured logs, metrics, tracing, correlation IDs и health checks.
+- [ ] Add a security workflow: threat modeling, trust boundaries, abuse cases, and security tests.
+- [ ] Add checks for secrets, dependencies, vulnerabilities, and unsafe logging.
+- [ ] Describe CI/CD requirements: lint, typecheck, tests, build, migration checks, and quality gates.
+- [ ] Add recommendations for rollout strategy, feature flags, canary releases, and rollback.
+- [ ] Expand observability recommendations: structured logs, metrics, tracing, correlation IDs, and health checks.
 
-## Архитектура и поддерживаемость
+## Architecture and maintainability
 
-- [ ] Добавить правила для Architecture Decision Records (ADR): решение, alternatives, trade-offs и последствия.
-- [ ] Добавить процесс управления техническим долгом: фиксация, оценка влияния, приоритизация и follow-up.
-- [ ] Описать правила code review: блокирующие замечания, проверка scope, compatibility, security и тестов.
-- [ ] Добавить рекомендации по non-functional requirements: performance, availability, scalability, privacy и operability.
-- [ ] Добавить правила проверки качества требований: testable acceptance criteria, edge cases и failure scenarios.
+- [ ] Add rules for Architecture Decision Records (ADR): decision, alternatives, trade-offs, and consequences.
+- [ ] Add a technical debt management process: recording, impact assessment, prioritization, and follow-up.
+- [ ] Describe code review rules: blocking findings, and checks for scope, compatibility, security, and tests.
+- [ ] Add recommendations for non-functional requirements: performance, availability, scalability, privacy, and operability.
+- [ ] Add rules for checking requirement quality: testable acceptance criteria, edge cases, and failure scenarios.
 
-## Документация и developer experience
+## Documentation and developer experience
 
-- [ ] Синхронизировать рекомендации по комментариям и doc comments с checklist и review gate.
-- [ ] Добавить шаблоны для ADR, risk assessment и release/rollback plan.
-- [ ] Добавить примеры quality gates для JavaScript/TypeScript, Python, Go, Rust и C#/.NET.
-- [ ] Проверить README и installation instructions после следующих изменений структуры skills.
+- [ ] Synchronize comment and doc-comment recommendations with the checklist and review gate.
+- [ ] Add templates for ADRs, risk assessments, and release/rollback plans.
+- [ ] Add quality gate examples for JavaScript/TypeScript, Python, Go, Rust, and C#/.NET.
+- [ ] Recheck the README and installation instructions after future changes to the skill structure.
 
-## Принцип внедрения
+## Implementation principle
 
-Новые правила должны быть применимыми к конкретному типу задачи и по возможности проверяемыми. Не следует превращать каждый небольшой change в полный production-readiness audit.
+New rules should apply to the specific type of task and be verifiable whenever possible. Do not turn every small change into a full production-readiness audit.
