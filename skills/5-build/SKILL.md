@@ -1,8 +1,7 @@
 ---
 name: 5-build
-description: Implement and verify planned changes in coherent increments, from small fixes through multi-step production work.
+description: "Implement and verify planned changes in coherent increments, from small fixes through multi-step production work."
 ---
-
 # 5-build — Implement and Verify
 
 Inspect repository state and relevant project documents before editing. Preserve unrelated user changes. Use `project/checklist.md` as the execution record; create it when needed from the approved scope, PRD, spec, or plan.
