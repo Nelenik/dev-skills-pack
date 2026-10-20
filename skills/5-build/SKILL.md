@@ -40,6 +40,9 @@ Apply these rules to new code and to the parts of existing code touched by the c
 - Make failure behavior deliberate: validate inputs at boundaries, preserve useful error context, use typed or structured errors where appropriate, and handle retries, timeouts, cancellation, partial failure, and cleanup according to the operation's risk.
 - Avoid duplicated sources of truth and derived state that can drift. Define ownership, invariants, lifecycle, and concurrency assumptions for shared state and resources.
 - Prefer clear, boring code over clever code. Optimize only where evidence supports it, and document non-obvious trade-offs, invariants, security assumptions, and compatibility constraints near the code.
+- Write code so another developer can understand its intent and reasoning. Add concise, meaningful comments for non-obvious business rules, algorithms, workarounds, invariants, security assumptions, lifecycle constraints, and intentional trade-offs; do not use comments to excuse unclear naming or avoid decomposition.
+- Document every public function, exported function, class, method, hook, endpoint, and other reusable entry point with the idiomatic documentation format of the language: for example JSDoc/TSDoc in JavaScript/TypeScript, docstrings in Python, Go doc comments in Go, rustdoc in Rust, or XML documentation comments in C#/.NET. Include purpose, parameters, return value, thrown errors or failure behavior, side effects, and important preconditions where applicable.
+- Add documentation to private functions as well when their behavior is non-obvious, their logic is complex, or their constraints would not be clear from the name and types alone. Keep documentation next to the code and update it whenever behavior or contracts change.
 - Add focused tests for business rules, edge cases, failure paths, and public contracts. Keep tests independent, deterministic, and proportional to risk; do not weaken production design merely to satisfy brittle tests.
 - Preserve backwards compatibility deliberately. For changed contracts, update consumers, validation, documentation, migrations, observability, and rollback or recovery procedures as applicable.
 - Before completion, inspect changed code for dead paths, accidental scope, leaked secrets, unsafe logging, resource leaks, race conditions, unnecessary work, and missing documentation. Record intentional exceptions and follow-ups in the checklist.
@@ -61,6 +64,21 @@ Apply these rules to new code and to the parts of existing code touched by the c
 - Prefer explicit types, narrow props, predictable data flow, and accessible semantic markup. Do not hide behavior in clever abstractions or premature design-system layers.
 - Add or update focused tests for extracted hooks, non-trivial logic, and important component behavior. Refactoring must preserve existing behavior unless a behavior change is explicitly part of the request.
 - Before completion, inspect changed files for oversized components, duplicated logic, hidden side effects, unnecessary re-renders, missing loading/error/empty states, accessibility regressions, and dead code. Record intentional exceptions and follow-ups in the checklist.
+
+### Adaptations by system type
+
+Apply only the adaptations relevant to the change. Do not impose a distributed-systems, database, or deployment checklist on an unrelated small task.
+
+- **Backend and APIs:** validate inputs at the boundary; enforce authentication and authorization on the server; use stable response and error contracts; handle pagination, rate limits, idempotency, timeouts, and backward compatibility deliberately.
+- **Databases and migrations:** verify indexes, constraints, nullability, locking, transaction boundaries, and query performance; make migrations safe for existing data and running versions; define backup, rollback or recovery, validation, and cleanup steps.
+- **Asynchronous and concurrent systems:** define cancellation, timeout, retry and backoff behavior; protect against duplicate processing, race conditions, unbounded queues, resource leaks, and non-graceful shutdown.
+- **External integrations and distributed systems:** isolate provider-specific code; define timeouts, retries, circuit breaking or fallback behavior; preserve correlation IDs; test malformed, delayed, duplicated, and unavailable responses with contract or integration tests.
+- **Security-sensitive changes:** keep secrets and personal data out of source and logs; review trust boundaries, permissions, input handling, dependency risk, and abuse cases; make security assumptions explicit and verify them in tests or checks.
+- **Observability and operations:** add structured logs, useful metrics, tracing or request IDs, health/readiness checks, and actionable failure context when the change affects production behavior.
+- **CLI, workers, and batch jobs:** use meaningful exit codes; support safe retries, dry-run where useful, resumability, progress or status reporting, bounded resource usage, and idempotent processing.
+- **Libraries and SDKs:** keep the public API minimal and explicit; preserve compatibility or document breaking changes; update examples, changelog, type declarations, and compatibility tests.
+- **Performance-sensitive code:** establish a baseline and measure before optimizing; inspect memory, CPU, I/O, query count, payload size, caching, and N+1 behavior; document the reason for non-obvious optimizations.
+- **Configuration and deployment:** distinguish configuration from secrets; validate required configuration at startup; document rollout order, feature flags, health checks, rollback, and compatibility between application and infrastructure versions.
 
 For migrations, verify preconditions, backup/recovery assumptions, idempotency, staged rollout, data validation, and cleanup separately. Never claim a migration or deployment ran when it did not.
 
