@@ -16,6 +16,38 @@ Cover architecture/data flow, interfaces, data model and migration, failure and 
 
 Read [references/spec-patterns.md](references/spec-patterns.md) when evaluating technical choices. Use [templates/spec-template.md](templates/spec-template.md) as the starting structure for `project/spec.md`.
 
-Write `project/spec.md` with `status: draft`; explain tradeoffs and resolve consequential unknowns. Set `status: approved` after review. Small local changes may skip this and go directly to `5-build`; risky, cross-component, data, or contract changes should have a spec or `6-plan`.
+## Architecture Decision Records (ADR)
+
+When the spec contains consequential technical decisions, record them as ADRs. An ADR documents a decision, its alternatives, trade-offs, and consequences so future maintainers understand why a particular approach was chosen.
+
+### When an ADR is required
+- Changing a public API contract or interface.
+- Changing the data model, storage technology, or migration strategy.
+- Choosing a new infrastructure, deployment, or integration pattern.
+- Any decision that is hard to reverse or has significant operational cost.
+- Any decision that affects security, privacy, or compliance.
+
+### When an ADR is optional
+- Local implementation details that are obvious from context.
+- Routine configuration or dependency choices.
+- Decisions that are already documented in the spec or plan.
+
+### ADR structure
+Use [templates/adr-template.md](templates/adr-template.md) as the starting structure. Each ADR must include:
+
+- **Status:** Proposed, Accepted, or Superseded.
+- **Context:** What problem or opportunity prompted the decision? What constraints existed?
+- **Decision:** What was decided? Be specific.
+- **Alternatives considered:** What other options were evaluated?
+- **Consequences:** What are the positive and negative outcomes? What new risks or costs appear?
+- **Risks and follow-ups:** What could go wrong? What should be monitored or revisited?
+
+### ADR placement
+- Store ADRs in `project/adr/` as individual files (e.g. `project/adr/0001-use-postgres.md`).
+- Link each ADR from the `## Decisions` section of `project/spec.md`.
+- Reference ADRs in `6-plan` when the decision affects implementation slices.
+- Update an ADR (do not delete) when it is superseded; link the new ADR to the old one.
+
+Write `project/spec.md` with `status: draft`; explain tradeoffs and resolve consequential unknowns. Set `status: approved` after review. Small local changes may skip this and go directly to `5-build`; risky, cross-component, data, or contract changes should have a spec or `6-plan`. For security-sensitive or data-heavy designs, use `9-security`.
 
 After approval, route work needing staged execution, migration, rollout, or coordination to `6-plan`; otherwise use `5-build`. Return to `3-prd` if the design exposes unresolved product behavior.

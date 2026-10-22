@@ -22,7 +22,8 @@ For planned work, each slice must contain: objective, affected paths/components,
 1. Read the slice and inspect the current code.
 2. Implement the smallest coherent change.
 3. Run focused tests, type checks, lint, build, migration validation, or manual checks appropriate to the change.
-4. Review the diff for accidental scope, secrets, compatibility problems, and missing documentation.
+4. Run `8-verify` for this slice; record evidence in the checklist.
+5. Review the diff for accidental scope, secrets, compatibility problems, and missing documentation.
 5. Update the checklist and affected project documents with actual results.
 6. Commit at a stable recovery point when the repository workflow expects commits.
 
@@ -101,12 +102,81 @@ When a decision changes, update the smallest authoritative document and all down
 
 For planned work, migrations, public contracts, security-sensitive changes, or changes touching multiple components, perform a final review before marking the increment done. Review the diff, tests, data migration, compatibility, observability, documentation, rollout, rollback, and accidental scope. Record findings and their resolution in the checklist. Unresolved high-risk findings block completion; low-risk follow-ups must be recorded explicitly.
 
+### Documentation and comment check
+
+Before completion, verify that documentation is synchronized with the code:
+
+- [ ] Public API, exported functions, classes, methods, hooks, and endpoints are documented with the idiomatic format of the language (JSDoc/TSDoc, docstrings, Go doc comments, rustdoc, XML comments).
+- [ ] Documentation includes purpose, parameters, return value, thrown errors or failure behavior, side effects, and important preconditions where applicable.
+- [ ] Private functions have documentation when their behavior is non-obvious, their logic is complex, or their constraints would not be clear from the name and types alone.
+- [ ] Comments are concise and meaningful: they explain non-obvious business rules, algorithms, workarounds, invariants, security assumptions, lifecycle constraints, and intentional trade-offs.
+- [ ] Comments do not excuse unclear naming or avoid decomposition — if a comment is needed to explain the code, the code itself should be clarified.
+- [ ] Documentation is updated whenever behavior or contracts change.
+- [ ] No dead code, no unrelated scope, and no leaked secrets in the diff.
+- [ ] Documentation and project context are current.
+
 ## Routing
 
 If requirements are unclear, return to `2-scope` or `3-prd`. If technical decisions are missing, use `4-spec`. If the work is bigger or riskier than expected, pause and create/update `6-plan`. When the increment is verified, update `project/context.md`; there is no separate ship stage in this workflow.
 
 ## Definition of Done
 
-An increment is done only when its agreed behavior works, relevant automated checks pass, manual checks are recorded, documentation and project context are current, migrations or rollout steps are verified, no unintended scope or secrets are present in the diff, and known follow-ups are recorded. For planned work, all checklist slices and evidence must be complete. If any condition is unknown, mark the increment incomplete rather than guessing.
+An increment is done only when its agreed behavior works, relevant automated checks pass, manual checks are recorded, documentation and project context are current, migrations or rollout steps are verified, no unintended scope or secrets are present in the diff, and known follow-ups are recorded. For planned work, all checklist slices and evidence must be complete. Apply `8-verify` before completion; for rollout changes apply `10-release`. If any condition is unknown, mark the increment incomplete rather than guessing.
+
+## Completion criteria by change type
+
+Before marking an increment complete, verify the applicable criteria below. Each criterion must have evidence recorded in `project/checklist.md`.
+
+### Frontend / UI
+- [ ] Component decomposition signals checked (size, nesting, mixed concerns).
+- [ ] Loading, empty, and error states are present and visible.
+- [ ] Accessibility: semantic markup, keyboard navigation, focus management.
+- [ ] No unnecessary re-renders; state ownership is justified.
+- [ ] Tests for hooks and non-trivial logic pass.
+- [ ] Evidence recorded in checklist.
+
+### Backend / API
+- [ ] Input validation at the boundary.
+- [ ] Auth/authz enforced server-side.
+- [ ] Stable response and error contracts documented.
+- [ ] Pagination, rate limits, idempotency, timeouts handled deliberately.
+- [ ] Backward compatibility preserved or breaking change documented.
+- [ ] Evidence recorded in checklist.
+
+### Databases / Migrations
+- [ ] Indexes, constraints, nullability, locking reviewed.
+- [ ] Migration is safe for existing data and running versions.
+- [ ] Backup/rollback/recovery steps documented and verified.
+- [ ] Idempotency and data validation confirmed.
+- [ ] Evidence recorded in checklist.
+
+### Integrations / Distributed
+- [ ] Provider-specific code is isolated.
+- [ ] Timeouts, retries, circuit breaking/fallback behavior defined.
+- [ ] Contract/integration tests cover malformed, delayed, duplicated, and unavailable responses.
+- [ ] Correlation IDs preserved across boundaries.
+- [ ] Evidence recorded in checklist.
+
+### CLI / Workers / Batch
+- [ ] Meaningful exit codes.
+- [ ] Safe retries, resumability, progress reporting.
+- [ ] Bounded resource usage, idempotent processing.
+- [ ] Evidence recorded in checklist.
+
+### Security-sensitive changes
+- [ ] Threat model documented (`9-security`).
+- [ ] Trust boundaries and abuse cases reviewed.
+- [ ] Secrets scan passed (no secrets in source or logs).
+- [ ] Security tests for authz, input validation, and abuse cases pass.
+- [ ] Evidence recorded in checklist.
+
+### Deployment / Infrastructure
+- [ ] CI gates pass: lint, typecheck, tests, build.
+- [ ] Migration checks pass.
+- [ ] Security scan passes.
+- [ ] Rollout strategy documented (feature flags, canary/staged).
+- [ ] Rollback procedure documented and tested.
+- [ ] Observability: structured logs, metrics, health checks, alertable failure behavior.
+- [ ] Evidence recorded in checklist.
 
 Resume from checklist, project documents, and git state. This skill remains the normal execution path after the first working version.

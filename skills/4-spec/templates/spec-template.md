@@ -34,10 +34,22 @@ Include APIs, events, CLI contracts, schemas, versioning, and compatibility expe
 
 ## Dependencies and Repository Impact
 
+## Non-functional Requirements (NFR)
+
+Document NFRs with testable criteria:
+
+- **Performance:** latency, throughput, resource usage (e.g. "P95 API response < 200ms under 1000 RPS").
+- **Availability:** uptime, error rate, graceful degradation (e.g. "99.9% monthly uptime").
+- **Scalability:** how the system behaves under increased load (e.g. "supports 10x current traffic without degradation").
+- **Privacy:** data minimization, encryption, retention (e.g. "PII encrypted at rest and in transit").
+- **Operability:** logging, metrics, health checks, alerting (e.g. "all API endpoints expose health checks").
+
 ## Alternatives and Trade-offs
 
 ## Assumptions and Open Questions
 
 ## Decisions
+
+Link each consequential decision to an ADR in `project/adr/`. Use [templates/adr-template.md](templates/adr-template.md) as the starting structure.
 
 ## Revisions

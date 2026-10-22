@@ -1,115 +1,51 @@
-# Project Development Skills
+# Project Dev Skills
 
-This skill set supports serious, iterative software development with an AI coding agent. It works for both new projects and existing repositories, and keeps the project context and planning artifacts in a `project/` directory inside the repository.
+Skill pack for product development workflow.
+
+## Structure
+
+- `skills/1-start` — establish project context
+- `skills/2-scope` — define direction
+- `skills/3-prd` — product requirements
+- `skills/4-spec` — technical design
+- `skills/5-build` — implement and verify
+- `skills/6-plan` — plan changes
+- `skills/7-review` — review changes
+- `skills/8-verify` — quality gates and evidence
+- `skills/9-security` — security workflow
+- `skills/10-release` — release and operations
+- `skills/11-test-strategy` — testing strategy
+- `skills/12-incident` — incident management and on-call
 
 ## Installation
 
-Copy the `skills/` directory into the location where your Codex setup discovers local skills. Keep the directory names unchanged:
+Place `skills/` in your skills directory. Each skill has `SKILL.md`, optional `templates/` and `references/`.
 
-```text
-skills/
-├── 1-start/
-├── 2-scope/
-├── 3-prd/
-├── 4-spec/
-├── 5-build/
-├── 6-plan/
-└── 7-review/
+## Templates and references
+
+| Skill | Templates | References |
+|-------|-----------|------------|
+| 1-start | `context-template.md` | |
+| 2-scope | `scope-template.md` | |
+| 3-prd | `prd-template.md` | `prd-guide.md` |
+| 4-spec | `spec-template.md`, `adr-template.md` | `spec-patterns.md` |
+| 5-build | `checklist-template.md` | |
+| 6-plan | `plan-template.md` | |
+| 7-review | | |
+| 8-verify | `verify-template.md`, `risk-assessment-template.md` | `gate-examples.md` |
+| 9-security | `threat-model-template.md` | |
+| 10-release | `rollback-plan-template.md`, `release-plan-template.md` | |
+| 11-test-strategy | `test-plan-template.md` | |
+| 12-incident | | |
+
+## Workflow overview
+
+```
+1-start → 2-scope → 3-prd → 4-spec → 6-plan → 5-build → 8-verify → 10-release
+                ↑                              ↑
+          9-security (when needed)    12-incident (when needed)
 ```
 
-The skill folders must contain their `SKILL.md` files. Templates are kept inside the skill that uses them:
-
-```text
-1-start/templates/context-template.md
-5-build/templates/checklist-template.md
-6-plan/templates/plan-template.md
-```
-
-Do not copy the `project/` directory into a repository during installation. It is created in the project being worked on when the workflow starts.
-
-### Install from a Git repository with the Skills CLI
-
-```bash
-npx skills add Nelenik/dev-skills-pack --all -y
-```
-
-The `--all` flag installs every skill exposed by the repository. The `-y` flag accepts the installation prompts automatically. To install only selected skills, omit `--all` and pass the requested skill names according to the Skills CLI syntax.
-
-To update the installed skills, run the same command again after the repository has changed:
- The repository should expose the skill folders with their `SKILL.md` files; keep the names `1-start`, `2-scope`, `3-prd`, `4-spec`, `5-build`, `6-plan`, and `7-review` unchanged.
-
-## Start a new project
-
-1. Create or open a dedicated project directory.
-2. Invoke `1-start`.
-3. Answer the context questions about the product, users, goals, constraints, and desired direction.
-4. Let `1-start` inspect the repository and create `project/context.md`.
-5. Follow the routing recommendation:
-
-   - unclear idea or product direction → `2-scope`;
-   - user-facing behavior → `3-prd`;
-   - architecture or contracts → `4-spec`;
-   - complex feature or migration → `6-plan`;
-   - small, clear implementation → `5-build`.
-
-Do not start implementation before the relevant requirements and technical decisions are clear enough for the size and risk of the work.
-
-## Start an existing project
-
-1. Open the repository root, not a parent directory.
-2. Invoke `1-start` even if the code already works.
-3. Let the agent inspect the repository, git history, manifests, tests, CI, deployment files, and existing documentation.
-4. Review the generated or updated `project/context.md`.
-5. Choose the next step based on the requested change:
-
-   - unclear product direction → `2-scope`;
-   - new or changed user behavior → `3-prd`;
-   - technical design or interface changes → `4-spec`;
-   - migration, refactor, upgrade, integration, rollout, or other multi-step work → `6-plan`;
-   - localized and low-risk change → `5-build`.
-
-Existing behavior is the baseline. Do not rewrite it or recreate documentation unless the user approves the change.
-
-## Normal workflow
-
-The skills are not a one-time tutorial. After the first working version, continue using the same workflow for every meaningful increment:
-
-```text
-1-start → 2-scope → 3-prd → 4-spec / 6-plan → 5-build → 7-review
-```
-
-Not every change needs every step. Small changes can go directly to `5-build`. A complex change may use `6-plan` and `4-spec` together. User-facing requirements belong in `3-prd`; architecture and contracts belong in `4-spec`; sequencing, rollout, migration, and risk management belong in `6-plan`.
-
-## Project documents
-
-The workflow stores its durable context in the repository:
-
-```text
-project/
-├── context.md     # current project state, constraints, risks, and repository map
-├── scope.md       # product direction, boundaries, priorities, and non-goals
-├── prd.md         # user-facing behavior and acceptance criteria
-├── spec.md        # technical design, contracts, data, and operations
-├── plan.md        # current complex change, sequencing, rollout, and rollback
-└── checklist.md   # implementation state and verification evidence
-```
-
-Only create documents that are relevant to the current work. Keep them synchronized with the code. When a decision changes, update the authoritative document and its downstream references instead of maintaining conflicting copies.
-
-## Working rules
-
-- Inspect the repository before making assumptions.
-- Preserve unrelated user changes.
-- Use direct mode for small, localized, reversible changes.
-- Use a plan for cross-component, data, contract, security, rollout, or high-risk changes.
-- Verify changes proportionally with tests, builds, migrations, and manual checks.
-- Record evidence in `project/checklist.md`.
-- Update `project/context.md` after meaningful increments.
-- Never request credentials in chat.
-- Do not use destructive git operations without explicit consent.
-
-## Resuming work
-
-When a session is interrupted, invoke `5-build` for an in-progress implementation. It should read `project/checklist.md`, the approved plan or spec, git state, and the current code, then continue from the first incomplete slice.
-
-For a new change after an earlier release, invoke `6-plan` for anything non-trivial or `5-build` for a small, clearly understood change. The project is never considered permanently finished after one working version.
+- `7-review` runs after implementation or before merge.
+- `11-test-strategy` defines test coverage and is referenced by `3-prd`, `5-build`, and `8-verify`.
+- `12-incident` handles production incidents and on-call readiness.

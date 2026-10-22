@@ -40,6 +40,25 @@ Apply only the gates relevant to the change:
 - **Maintainability:** understandable names and control flow, appropriate comments or doc comments for non-obvious logic, no dead code, no unrelated scope, and documentation synchronized with behavior.
 - **Frontend:** accessibility, loading/error/empty states, unnecessary re-renders, state ownership, server/client boundaries, and component decomposition where applicable.
 
+## Blocking findings
+
+These findings block merge or release and must be resolved before the change can proceed:
+
+- Data loss, corruption, or irreversible migration without rollback.
+- Security vulnerability: auth bypass, injection, privilege escalation, or secret exposure.
+- Severe outage or broken core behavior in a common path.
+- Invalid migration or deployment path that cannot be rolled back.
+- Missing tests for high-risk paths with no recorded follow-up.
+- Breaking change to a public contract without documentation or migration plan.
+- Unsafe logging of secrets or PII.
+
+## Non-blocking findings
+
+These findings should be resolved before merge when practical, or recorded as explicit follow-ups:
+
+- Medium: real defect or maintainability problem with limited scope, missing important coverage, or a risky assumption.
+- Low: minor clarity, consistency, or non-blocking improvement.
+
 ## Finding severity
 
 Use these levels consistently:
@@ -76,4 +95,4 @@ Do not claim that code is fully correct or production-ready when tests, environm
 
 ## Routing
 
-If requirements or acceptance criteria are unclear, return to `2-scope` or `3-prd`. If the technical design is the problem, use `4-spec`. If the change needs implementation fixes, use `5-build`. If the review exposes a broad refactor, migration, rollout, or other multi-step change, use `6-plan` before implementation.
+If requirements or acceptance criteria are unclear, return to `2-scope` or `3-prd`. If the technical design is the problem, use `4-spec`. If the change needs implementation fixes, use `5-build`. If security, release, or test-coverage gaps appear, use `9-security`, `10-release`, or `11-test-strategy`. If the review exposes a broad refactor, migration, rollout, or other multi-step change, use `6-plan` before implementation.
