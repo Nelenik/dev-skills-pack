@@ -27,7 +27,23 @@ For UI changes, use `13-ux-design → 14-ui-design → 15-ui-verify` as needed. 
 
 ## Installation
 
-Place `skills/` in your skills directory. Each skill has `SKILL.md`, optional `templates/` and `references/`.
+### Install all skills for the current project
+
+```bash
+npx skills add Nelenik/dev-skills-pack --all -y
+```
+
+### Install all skills globally
+
+Use `-g` / `--global` to install into your user-level skills directory:
+
+```bash
+npx skills add Nelenik/dev-skills-pack --all -g -y
+```
+
+Project installation is recommended for team projects because the skills are visible in version-controlled setup and can be kept consistent. Global installation is convenient for personal use across repositories.
+
+Each skill has `SKILL.md`, optional `templates/` and `references/`.
 
 ## Templates and references
 
