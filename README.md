@@ -17,6 +17,14 @@ Skill pack for product development workflow.
 - `skills/11-test-strategy` — testing strategy
 - `skills/12-incident` — incident management and on-call
 
+## UI/UX layer
+
+- `skills/13-ux-design` — user flows, interaction states, and accessibility requirements
+- `skills/14-ui-design` — visual direction, design tokens, responsive UI, and component consistency
+- `skills/15-ui-verify` — browser, responsive, accessibility, and visual verification
+
+For UI changes, use `13-ux-design → 14-ui-design → 15-ui-verify` as needed. Small visual fixes may go directly to `5-build` and `15-ui-verify`.
+
 ## Installation
 
 Place `skills/` in your skills directory. Each skill has `SKILL.md`, optional `templates/` and `references/`.
@@ -49,3 +57,6 @@ Place `skills/` in your skills directory. Each skill has `SKILL.md`, optional `t
 - `7-review` runs after implementation or before merge.
 - `11-test-strategy` defines test coverage and is referenced by `3-prd`, `5-build`, and `8-verify`.
 - `12-incident` handles production incidents and on-call readiness.
+- `13-ux-design` defines user journeys, interaction states, and accessibility expectations.
+- `14-ui-design` defines visual and responsive implementation decisions.
+- `15-ui-verify` records browser, accessibility, responsive, and visual evidence.
