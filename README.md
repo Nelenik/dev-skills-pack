@@ -1,78 +1,134 @@
-# Project Dev Skills
+# Dev Skills Pack
 
-Skill pack for product development workflow.
-
-## Structure
-
-- `skills/1-start` — establish project context
-- `skills/2-scope` — define direction
-- `skills/3-prd` — product requirements
-- `skills/4-spec` — technical design
-- `skills/5-build` — implement and verify
-- `skills/6-plan` — plan changes
-- `skills/7-review` — review changes
-- `skills/8-verify` — quality gates and evidence
-- `skills/9-security` — security workflow
-- `skills/10-release` — release and operations
-- `skills/11-test-strategy` — testing strategy
-- `skills/12-incident` — incident management and on-call
-
-## UI/UX layer
-
-- `skills/13-ux-design` — user flows, interaction states, and accessibility requirements
-- `skills/14-ui-design` — visual direction, design tokens, responsive UI, and component consistency
-- `skills/15-ui-verify` — browser, responsive, accessibility, and visual verification
-
-For UI changes, use `13-ux-design → 14-ui-design → 15-ui-verify` as needed. Small visual fixes may go directly to `5-build` and `15-ui-verify`.
+A workflow toolkit for AI coding agents. The developer controls requirements, architectural decisions, scope, and workflow transitions. The agent handles routine work within approved boundaries.
 
 ## Installation
 
-### Install all skills for the current project
+Requires Node.js and a supported AI coding agent. This repository does not require a `package.json`.
+
+**Project installation:**
 
 ```bash
-npx skills add Nelenik/dev-skills-pack --all -y
+npx skills add Nelenik/dev-skills-pack --branch main --all -y
 ```
 
-### Install all skills globally
-
-Use `-g` / `--global` to install into your user-level skills directory:
+Install for one agent instead:
 
 ```bash
-npx skills add Nelenik/dev-skills-pack --all -g -y
+npx skills add Nelenik/dev-skills-pack --branch main --agent codex -y
 ```
 
-Project installation is recommended for team projects because the skills are visible in version-controlled setup and can be kept consistent. Global installation is convenient for personal use across repositories.
+**Global installation:**
 
-Each skill has `SKILL.md`, optional `templates/` and `references/`.
-
-## Templates and references
-
-| Skill | Templates | References |
-|-------|-----------|------------|
-| 1-start | `context-template.md` | |
-| 2-scope | `scope-template.md` | |
-| 3-prd | `prd-template.md` | `prd-guide.md` |
-| 4-spec | `spec-template.md`, `adr-template.md` | `spec-patterns.md` |
-| 5-build | `checklist-template.md` | |
-| 6-plan | `plan-template.md` | |
-| 7-review | | |
-| 8-verify | `verify-template.md`, `risk-assessment-template.md` | `gate-examples.md` |
-| 9-security | `threat-model-template.md` | |
-| 10-release | `rollback-plan-template.md`, `release-plan-template.md` | |
-| 11-test-strategy | `test-plan-template.md` | |
-| 12-incident | | |
-
-## Workflow overview
-
-```
-1-start → 2-scope → 3-prd → 4-spec → 6-plan → 5-build → 8-verify → 10-release
-                ↑                              ↑
-          9-security (when needed)    12-incident (when needed)
+```bash
+npx skills add Nelenik/dev-skills-pack --branch main --all -g -y
 ```
 
-- `7-review` runs after implementation or before merge.
-- `11-test-strategy` defines test coverage and is referenced by `3-prd`, `5-build`, and `8-verify`.
-- `12-incident` handles production incidents and on-call readiness.
-- `13-ux-design` defines user journeys, interaction states, and accessibility expectations.
-- `14-ui-design` defines visual and responsive implementation decisions.
-- `15-ui-verify` records browser, accessibility, responsive, and visual evidence.
+Replace `codex` with your agent's supported name.
+
+**Update skills:**
+
+```bash
+npx skills check
+npx skills update -p  # project
+npx skills update -g  # global
+```
+
+Updating skills does not automatically update the workflow instructions in `AGENTS.md`. Use `0-setup` when those instructions need to be refreshed.
+
+## Setup
+
+Start a new project or introduce the workflow to an existing one by invoking:
+
+```text
+Invoke skill `0-setup`
+```
+
+The agent initializes `AGENTS.md` and project tracking files. Review any proposed changes before approving them.
+
+### Optional: Claude Code
+
+If you use Claude Code and want a dedicated entry point, ask the agent to create `CLAUDE.md` separately. It should import the shared instructions from `AGENTS.md`:
+
+```markdown
+@AGENTS.md
+```
+
+Do not duplicate the workflow instructions in both files. Keep `AGENTS.md` as the shared source of truth.
+
+## Start every session
+
+At the beginning of **every new coding session**, invoke:
+
+```text
+Invoke skill `1-start`
+```
+
+The agent checks the current workflow state and runs the read-only detection part of `18-sync`. It reports the current task, discrepancies, and recommended next action. If unexpected changes require a decision, it stops and asks before proceeding.
+
+Project files—not conversation history—are the persistent source of context.
+
+## Workflows
+
+### New project
+
+`0-setup` → `1-start` → `2-scope` → `3-prd` → `16-roadmap`
+
+Define the project, requirements, and development stages before implementation.
+
+### Existing project
+
+Run `0-setup` if the workflow is not configured, then invoke `1-start`. The agent inspects the existing code and documents, identifies gaps, and helps reconstruct the project state without recreating approved documents.
+
+### Implement a stage or feature
+
+`4-spec` → `6-plan` → `17-tasks` → `7-review` → `5-build` → `8-verify`
+
+Approve the plan before implementation. The agent implements one approved task at a time and stops for review before continuing.
+
+### Small change
+
+Request `5-build` in ad-hoc mode. Agree on task boundaries and permitted files before implementation.
+
+### Synchronize after manual changes
+
+Invoke `18-sync`. It detects differences without modifying files. Review the findings and approve any reconciliation before changes are applied.
+
+## Key skills
+
+| Skill | Purpose |
+|---|---|
+| `0-setup` | Initialize workflow instructions and project tracking |
+| `1-start` | Resume a session and identify the next action |
+| `2-scope`, `3-prd` | Define project boundaries and requirements |
+| `4-spec`, `6-plan`, `17-tasks` | Specify and plan work |
+| `7-review`, `5-build`, `8-verify` | Review, implement, and verify |
+| `16-roadmap` | Plan and track development stages |
+| `18-sync` | Detect and reconcile project changes |
+| `9-security`–`15-ui-verify` | Specialized security, release, testing, incident, and UI workflows |
+
+## Project files
+
+Files are created as needed; not all exist initially.
+
+- `AGENTS.md` — shared agent instructions.
+- `CLAUDE.md` — optional Claude Code entry point.
+- `project/state.md` — current workflow status.
+- `project/context.md` — project context and constraints.
+- `project/decisions.md` — accepted decisions.
+- `project/backlog.md` — deferred work.
+- `project/scope.md`, `prd.md`, `roadmap.md` — project definition and planning.
+- `project/stages/` and `project/changes/` — stage and change specifications, plans, and tasks.
+- `project/.sync/` — snapshots for detecting changes.
+
+## Autonomy and approvals
+
+**The agent can independently** inspect files, run non-destructive checks, and perform routine work within an approved task.
+
+**Your decision is required** to choose the next task, resolve significant ambiguity, change approved scope, or handle unexpected changes.
+
+**Explicit permission is required** before unapproved implementation, out-of-scope edits, destructive actions, dependency/environment/CI changes, commits, or pushes.
+
+After each implementation task, the agent reports changed files, a diff or summary, checks, and unresolved issues, then stops. Tests passing does not mean the task is accepted.
+
+**Rule of thumb:** start every session with `1-start`, approve work before implementation, and keep control of decisions and workflow transitions.

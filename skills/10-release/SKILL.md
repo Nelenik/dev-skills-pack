@@ -38,7 +38,7 @@ The following gates must pass before a release. Mark each gate with evidence (co
 - [ ] Unsafe logging check passes. Evidence: grep output or static analysis report.
 
 ### Quality gates
-- [ ] All applicable `8-verify` gates pass with evidence recorded in `project/checklist.md`.
+- [ ] All applicable `8-verify` gates pass with evidence recorded in the task's `Evidence` field (or `project/checklist.md` for ad-hoc work).
 
 ## Rollout strategy
 

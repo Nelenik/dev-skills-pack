@@ -1,6 +1,6 @@
 # Quality gate examples
 
-Use these examples as starting points for `project/checklist.md`. Adapt commands to the project's actual tooling and configuration.
+Use these examples as starting points for a task's acceptance and `Evidence` fields (or `project/checklist.md` for ad-hoc work). Adapt commands to the project's actual tooling and configuration.
 
 ## JavaScript / TypeScript
 

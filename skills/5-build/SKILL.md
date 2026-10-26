@@ -1,35 +1,54 @@
 ---
 name: 5-build
-description: "Implement and verify planned changes in coherent increments, from small fixes through multi-step production work."
+description: "Implement exactly one approved task at a time within its file whitelist, verify it with evidence, report, and stop. Never selects or starts the next task on its own."
 ---
-# 5-build — Implement and Verify
+# 5-build — Implement One Task, Verify, Report, Stop
 
-Inspect repository state and relevant project documents before editing. Preserve unrelated user changes. Use `project/checklist.md` as the execution record; create it when needed from the approved scope, PRD, spec, or plan.
+> Working agreement: `AGENTS.md` (dev-skills-pack block). Read it first if it is not already in context.
 
-Use [templates/checklist-template.md](templates/checklist-template.md) as the starting structure for planned work, adapting the slices and evidence to the actual change.
+You implement tasks the developer approved. You do not decide what to build, in what order, which files to touch, or when to continue.
 
-## Choose execution mode
+## Preconditions (check before editing anything)
 
-- **Direct mode:** one or a few localized files, clear behavior, reversible change, no data/schema/public-contract/security/deployment impact. Do an impact check, implement, verify, and summarize.
-- **Planned mode:** multiple components, migrations, public APIs, dependency upgrades, risky refactors, rollout work, or unclear behavior. Require an approved `project/plan.md` or `project/spec.md`, then execute ordered slices.
+1. `project/state.md` exists and the detect step of `18-sync` found nothing unresolved.
+2. The active work folder's `tasks.md` has file-level `status: approved`; the task's dependencies are `done`; its own status is `todo` or `in-progress`; and the developer explicitly told you to start that task. `approved` is never an individual task status.
+3. The parent spec and plan are `status: approved`.
 
-## Checklist format
+If any condition is false, do not build. Say which one is missing and propose the skill that fixes it (`4-spec`, `6-plan`, `17-tasks`, `18-sync`).
 
-For planned work, each slice must contain: objective, affected paths/components, dependencies, implementation notes, verification commands and manual checks, rollback or recovery note when relevant, and completion evidence. Keep dependencies explicit and never mark a slice complete without evidence.
+## Execution loop (one task)
 
-## Execution loop
+1. Read the task and the current code of the listed files, plus only the read-only context needed to understand them. Run the baseline checks and note the result.
+2. Implement the smallest change that satisfies the task's acceptance. Edit only whitelisted implementation/test files, plus the limited workflow files needed to record status/evidence (`state.md`, active `tasks.md`, `backlog.md` when needed, and the sync report).
+3. Stop and ask instead of continuing when: another file must change, a dependency or generator is needed, the task is larger than described, the spec or plan looks wrong, or a requirement is ambiguous. Do not widen scope silently and do not "fix it quickly".
+4. Run the task's acceptance checks and the baseline gates for the current phase (`8-verify`, "Phase baseline"). Record the exact commands and real results in the task's `Evidence` field.
+5. Review your own diff: only whitelisted files, no secrets, no unrelated edits, no dead code, documentation and comments per the quality gate below.
+6. Set the task status to `review` (never `done`), update `tasks.md` and `state.md`, and park anything you noticed but did not do in `project/backlog.md`. Do not modify approved specs, plans, PRDs, or other documents under this administrative exception.
+7. Output the task report defined in `AGENTS.md` using `Result`, `Next step`, `Command`, and `Approval`, then stop. Do not start the next task or equate successful verification with developer acceptance. Do not commit unless the developer asked.
 
-1. Read the slice and inspect the current code.
-2. Implement the smallest coherent change.
-3. Run focused tests, type checks, lint, build, migration validation, or manual checks appropriate to the change.
-4. Run `8-verify` for this slice; record evidence in the checklist.
-5. Review the diff for accidental scope, secrets, compatibility problems, and missing documentation.
-5. Update the checklist and affected project documents with actual results.
-6. Commit at a stable recovery point when the repository workflow expects commits.
+## Batch mode
+
+Only when the developer names the tasks ("do T-04 to T-06"). Report after each task and stop at the first failed check or deviation.
+
+## Ad-hoc mode
+
+Only when the developer explicitly asks for a small change outside the task list. For a local, reversible bug, use the short route: one-sentence intent, up to 3 implementation/test files, explicit "go", focused checks, and a concise report. Do not create PRD, roadmap, spec, or plan documents. The developer still chooses the mode and authorizes execution; the agent does not decide that a change is small enough. Use `project/checklist.md` ([templates/checklist-template.md](templates/checklist-template.md)) only when evidence needs to persist. If behavior, public contracts, data, security, infrastructure, or architecture is affected, stop and propose `17-tasks`, `4-spec`, or `6-plan` instead.
+
+## Deviations
+
+If implementation contradicts the spec or plan, stop and describe the contradiction with options. The developer decides; record the outcome under `## Revisions` of the affected document. Never use destructive git operations. Preserve unrelated changes, including the developer's manual edits.
+
+### Stop and resume protocol
+
+When the task cannot be completed within its approved scope: record what changed, do not expand the whitelist or start another task, show the actual diff and checks, explain the blocker, and offer the options to fix within scope, revise the specification, or split the task. Wait for the developer's decision, update only the documents they approve, and continue only after explicit permission.
+
+Ad-hoc mode is selected by the developer. It is limited to a small, local, reversible bug with an explicit file list and checks; behavior changes, public contracts, data models, security, infrastructure, and architectural refactors require the corresponding planning/design flow.
 
 ## Engineering quality gate
 
-Apply these rules to new code and to the parts of existing code touched by the change, regardless of language, framework, or application type. Do not preserve a clearly unhealthy structure merely because the requested behavior is small; make the smallest safe refactor needed to keep the design maintainable. Do not perform unrelated broad rewrites.
+Apply this gate proportionally to the change and its risk, using `8-verify` as the authoritative selection of applicable checks. Small local UI changes need focused UI, accessibility, and relevant-test checks; business logic needs boundary and failure-path checks; API, authorization, database, migration, infrastructure, and contract changes require their specialized gates. Documentation is required for public/reusable interfaces and non-obvious behavior, not mechanically for every function. Do not impose unrelated gates on low-risk changes.
+
+Apply these rules to new code and to the parts of existing code touched by the change, regardless of language, framework, or application type. These rules apply only to the files in the task whitelist. If a rule shows that structure outside the whitelist or a larger refactor is needed, do not do it: describe it in the task report and put it in `backlog.md`, or propose a task. Inside the whitelist, make only the smallest refactor the task itself needs. Do not perform unrelated broad rewrites.
 
 ### General software engineering practices
 
@@ -93,14 +112,15 @@ Keep the documents aligned with the code and with each other:
 - `scope.md`: product direction, boundaries, priorities, and non-goals;
 - `prd.md`: user-facing behavior and acceptance criteria;
 - `spec.md`: technical design, contracts, data, and operational decisions;
+- `roadmap.md`: stages and their status (developer-controlled);
 - `plan.md`: change-specific sequence, risks, rollout, and rollback;
-- `checklist.md`: execution state and evidence.
+- `tasks.md`: task state and evidence (`checklist.md` is used only for ad-hoc work).
 
-When a decision changes, update the smallest authoritative document and all downstream documents that depend on it. Do not duplicate conflicting copies. Record the reason in `## Revisions` and link related documents when useful. Before completion, compare the diff against this list and note documents that were intentionally unchanged.
+When a decision changes, propose an update to the smallest authoritative document and the downstream documents that depend on it, show the diff, and apply it after the developer agrees. When code and documents disagree, code wins; list the divergences through `18-sync`. Do not duplicate conflicting copies. Record the reason in `## Revisions` and link related documents when useful. Before completion, compare the diff against this list and note documents that were intentionally unchanged.
 
 ## Review gate
 
-For planned work, migrations, public contracts, security-sensitive changes, or changes touching multiple components, perform a final review before marking the increment done. Review the diff, tests, data migration, compatibility, observability, documentation, rollout, rollback, and accidental scope. Record findings and their resolution in the checklist. Unresolved high-risk findings block completion; low-risk follow-ups must be recorded explicitly.
+For planned work, migrations, public contracts, security-sensitive changes, or changes touching multiple components, perform a final review before marking the increment done. Review the diff, tests, data migration, compatibility, observability, documentation, rollout, rollback, and accidental scope. Record findings and their resolution in the task's `Evidence` field (or in `checklist.md` for ad-hoc work). Unresolved high-risk findings block completion; low-risk follow-ups must be recorded explicitly.
 
 ### Documentation and comment check
 
@@ -117,66 +137,14 @@ Before completion, verify that documentation is synchronized with the code:
 
 ## Routing
 
-If requirements are unclear, return to `2-scope` or `3-prd`. If technical decisions are missing, use `4-spec`. If the work is bigger or riskier than expected, pause and create/update `6-plan`. When the increment is verified, update `project/context.md`; there is no separate ship stage in this workflow.
+If requirements are unclear, stop and propose `2-scope` or `3-prd`. If technical decisions are missing, propose `4-spec`. If a task is bigger or riskier than described, stop and propose splitting it through `17-tasks` or revising `6-plan`. When a stage closes, `16-roadmap` updates `project/context.md`; there is no separate ship stage in this workflow.
 
 ## Definition of Done
 
-An increment is done only when its agreed behavior works, relevant automated checks pass, manual checks are recorded, documentation and project context are current, migrations or rollout steps are verified, no unintended scope or secrets are present in the diff, and known follow-ups are recorded. For planned work, all checklist slices and evidence must be complete. Apply `8-verify` before completion; for rollout changes apply `10-release`. If any condition is unknown, mark the increment incomplete rather than guessing.
+The agent sets a finished task to `review`; only the developer sets `done`. A task is ready for review only when its agreed behavior works, relevant automated checks pass, manual checks are recorded, documentation and project context are current, migrations or rollout steps are verified, no unintended scope or secrets are present in the diff, and known follow-ups are recorded. For planned work, the task's acceptance checks and evidence must be complete. Apply `8-verify` before completion; for rollout changes apply `10-release`. If any condition is unknown, mark the increment incomplete rather than guessing.
 
 ## Completion criteria by change type
 
-Before marking an increment complete, verify the applicable criteria below. Each criterion must have evidence recorded in `project/checklist.md`.
+The per-type gates (frontend/UI, backend/API, databases, integrations, CLI/workers, security, deployment) live in `8-verify`. Apply only those that the plan or task marks as relevant, at the tier that matches the phase (`8-verify`, "Phase baseline"), and record the evidence in the task's `Evidence` field.
 
-### Frontend / UI
-- [ ] Component decomposition signals checked (size, nesting, mixed concerns).
-- [ ] Loading, empty, and error states are present and visible.
-- [ ] Accessibility: semantic markup, keyboard navigation, focus management.
-- [ ] No unnecessary re-renders; state ownership is justified.
-- [ ] Tests for hooks and non-trivial logic pass.
-- [ ] Evidence recorded in checklist.
-
-### Backend / API
-- [ ] Input validation at the boundary.
-- [ ] Auth/authz enforced server-side.
-- [ ] Stable response and error contracts documented.
-- [ ] Pagination, rate limits, idempotency, timeouts handled deliberately.
-- [ ] Backward compatibility preserved or breaking change documented.
-- [ ] Evidence recorded in checklist.
-
-### Databases / Migrations
-- [ ] Indexes, constraints, nullability, locking reviewed.
-- [ ] Migration is safe for existing data and running versions.
-- [ ] Backup/rollback/recovery steps documented and verified.
-- [ ] Idempotency and data validation confirmed.
-- [ ] Evidence recorded in checklist.
-
-### Integrations / Distributed
-- [ ] Provider-specific code is isolated.
-- [ ] Timeouts, retries, circuit breaking/fallback behavior defined.
-- [ ] Contract/integration tests cover malformed, delayed, duplicated, and unavailable responses.
-- [ ] Correlation IDs preserved across boundaries.
-- [ ] Evidence recorded in checklist.
-
-### CLI / Workers / Batch
-- [ ] Meaningful exit codes.
-- [ ] Safe retries, resumability, progress reporting.
-- [ ] Bounded resource usage, idempotent processing.
-- [ ] Evidence recorded in checklist.
-
-### Security-sensitive changes
-- [ ] Threat model documented (`9-security`).
-- [ ] Trust boundaries and abuse cases reviewed.
-- [ ] Secrets scan passed (no secrets in source or logs).
-- [ ] Security tests for authz, input validation, and abuse cases pass.
-- [ ] Evidence recorded in checklist.
-
-### Deployment / Infrastructure
-- [ ] CI gates pass: lint, typecheck, tests, build.
-- [ ] Migration checks pass.
-- [ ] Security scan passes.
-- [ ] Rollout strategy documented (feature flags, canary/staged).
-- [ ] Rollback procedure documented and tested.
-- [ ] Observability: structured logs, metrics, health checks, alertable failure behavior.
-- [ ] Evidence recorded in checklist.
-
-Resume from checklist, project documents, and git state. This skill remains the normal execution path after the first working version.
+Resume from `project/state.md`, the active `tasks.md`, project documents, and git state. This skill is the execution path for approved tasks in every phase; it never selects the next task by itself.

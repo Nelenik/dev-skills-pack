@@ -6,6 +6,8 @@ updated: YYYY-MM-DD
 
 # Implementation Checklist
 
+> Used for ad-hoc work. For staged work the execution record is the active `tasks.md` (status and `Evidence` per task); copy gates from below into a task's acceptance only when the plan marks them relevant.
+
 ## Preconditions
 - [ ] Dependencies, environment, and baseline checks confirmed.
 - [ ] Current branch, working tree, and baseline checks recorded.

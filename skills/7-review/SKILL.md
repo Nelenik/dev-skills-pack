@@ -93,6 +93,23 @@ Return the outcome in this order:
 
 Do not claim that code is fully correct or production-ready when tests, environments, requirements, or deployment evidence were unavailable. A clean review means no issues were found within the inspected scope, not that every possible defect was disproven.
 
+## Pre-build consistency check (read-only)
+
+Run after `17-tasks` and before the first `5-build` task of a stage or change, or when the developer asks. Nothing is edited; the output is a report in chat.
+
+Check that:
+
+- every requirement or exit criterion covered by the spec and plan is covered by at least one task, and every task traces to one (no orphan tasks, no uncovered requirements);
+- every task has a file whitelist of at most 3 files, or an approved written reason for more, and its acceptance is a concrete command or manual step;
+- task dependencies are acyclic and early tasks leave the project runnable;
+- specs and plan respect the binding conventions in `context.md` and do not contradict each other or the PRD;
+- risk levels are proposed for risky tasks and generator or scaffolder tasks name the exact command and expected files;
+- nothing in the tasks belongs to a later stage.
+
+Report findings with the usual severities; the developer decides how to resolve each, then `17-tasks` or the owning document is revised.
+
 ## Routing
+
+After review, report `Result`, `Next step`, `Command`, and `Approval`. If the task list passes, recommend `5-build` with `Invoke skill `5-build`` for the specifically authorized task; otherwise recommend the single action needed to resolve the finding and wait.
 
 If requirements or acceptance criteria are unclear, return to `2-scope` or `3-prd`. If the technical design is the problem, use `4-spec`. If the change needs implementation fixes, use `5-build`. If security, release, or test-coverage gaps appear, use `9-security`, `10-release`, or `11-test-strategy`. If the review exposes a broad refactor, migration, rollout, or other multi-step change, use `6-plan` before implementation.

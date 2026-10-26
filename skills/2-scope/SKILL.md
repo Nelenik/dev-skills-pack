@@ -4,6 +4,8 @@ description: "Define or reshape product direction, boundaries, outcomes, and pri
 ---
 # 2-scope — Define Direction
 
+> Working agreement: `AGENTS.md` (dev-skills-pack block). Read it first if it is not already in context.
+
 Read `project/context.md` and inspect the repository first. This supports both new products and existing systems; preserve current behavior unless an intentional change is approved.
 
 ## Discovery conversation
@@ -18,4 +20,4 @@ Write `project/scope.md` with `status: draft`, show consequential decisions, and
 
 Use [templates/scope-template.md](templates/scope-template.md) as the starting structure. Remove irrelevant sections, but do not leave misleading placeholders.
 
-After approval, route user-facing behavior to `3-prd`, architecture or interfaces to `4-spec`, multi-step or risky work to `6-plan`, and a small clear implementation to `5-build`.
+After approval, report `Result`, `Next step`, `Command`, and `Approval`, then wait. Recommend one appropriate next skill using `Invoke skill `<name>``: `3-prd`, `16-roadmap`, `4-spec`, or `6-plan` according to the state. Never start implementation from this skill.

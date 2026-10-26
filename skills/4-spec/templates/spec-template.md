@@ -6,6 +6,10 @@ updated: YYYY-MM-DD
 
 # Technical Specification
 
+## Stage and Scope
+
+Roadmap stage (or change), the exit criteria this spec serves, and other specs of the same stage. For a partial stage: what already exists and what this spec changes.
+
 ## Summary and Goals
 
 ## Current State

@@ -7,31 +7,37 @@ description: "Verify changes with evidence-based quality gates tailored to chang
 
 Use after implementation or during review. Every gate item must link to evidence: a command, test, manual check, or artifact. No evidence = not verified.
 
+## Phase baseline
+
+- **`mvp` phase:** verify each task with its own acceptance checks plus the project's baseline commands that exist (lint, typecheck, build, and the tests covering the changed files). The heavier gates below (security, release, rollout, incident) apply only when the plan or task references them, in a dedicated hardening stage, or when the developer asks. Do not add gates on your own initiative.
+- **`evolve` phase:** gates follow the risk level below.
+- In every phase a gate without evidence is not verified, and the agent never marks a task `done`; it reports evidence and the developer accepts.
+
 ## Risk matrix
 
-Each change is classified by scope and impact. The level determines which gates apply and how much verification is required.
+The risk level is proposed in the plan or task and confirmed by the developer. During implementation you may raise it and say so, but never lower it. The level determines which gates apply and how much verification is required.
 
 ### Low risk
 - Localized, reversible, no contract/data/security/deploy impact.
 - **Required verification:** focused checks only (unit tests, typecheck, lint on changed files).
-- **Approval:** implementer may mark complete without separate review gate.
+- **Approval:** the agent reports evidence and sets the task to `review`; the developer accepts it.
 - **Examples:** bug fix in one file, UI tweak, minor config change.
 
 ### Medium risk
 - Multi-component or contract-touching, but no data migration or security exposure.
 - **Required verification:** full relevant gates for the change type, plus a review gate.
-- **Approval:** implementer + reviewer must agree; high-risk findings block completion.
+- **Approval:** `7-review` run and findings resolved, then the developer accepts; high-risk findings block completion.
 - **Examples:** API contract change, refactor touching several modules, dependency upgrade.
 
 ### High risk
 - Migrations, public contracts, security-sensitive changes, deployment/infrastructure changes, or anything affecting user data or availability.
 - **Required verification:** all applicable gates for the change type, plus rollback evidence, plus a review gate, plus a security gate when applicable.
-- **Approval:** implementer + reviewer + (security-sensitive) `9-security` sign-off; rollback procedure must be documented and tested.
+- **Approval:** `7-review` run and findings resolved, `9-security` review when security-sensitive, then the developer accepts; rollback procedure must be documented and tested.
 - **Examples:** database migration, breaking API change, auth change, infrastructure change, rollout to production.
 
 ## Change type completion criteria
 
-Each change type has executable completion criteria. Copy the relevant gates into `project/checklist.md` and mark them done with evidence. Do not mark a gate complete without a command, test, manual check, or artifact as evidence.
+Each change type has executable completion criteria. Copy the relevant gates into the task's acceptance and `Evidence` fields (or into `project/checklist.md` for ad-hoc work) and mark them done with evidence. Do not mark a gate complete without a command, test, manual check, or artifact as evidence.
 
 ### Frontend / UI
 - Component decomposition signals checked (size, nesting, mixed concerns).
@@ -77,47 +83,6 @@ Each change type has executable completion criteria. Copy the relevant gates int
 - Route to `10-release`. Verify CI gates, rollout, rollback, observability.
 - **Completion evidence:** CI pipeline output, rollout plan, rollback test result, observability check output.
 
-## Gates by change type
-
-Apply only relevant sections.
-
-### Frontend / UI
-- Component decomposition signals checked (size, nesting, mixed concerns).
-- Loading/empty/error states present.
-- Accessibility: semantic markup, keyboard, focus.
-- No unnecessary re-renders; state ownership justified.
-- Tests for hooks and non-trivial logic.
-
-### Backend / API
-- Input validation at boundary.
-- Auth/authz enforced server-side.
-- Stable response/error contracts.
-- Pagination, rate limits, idempotency, timeouts.
-- Backward compatibility deliberate.
-
-### Databases / Migrations
-- Indexes, constraints, nullability, locking.
-- Migration safe for existing data and running versions.
-- Backup/rollback/recovery steps documented and verified.
-- Idempotency and data validation.
-
-### Integrations / Distributed
-- Provider code isolated.
-- Timeouts, retries, circuit breaking/fallback.
-- Contract/integration tests for malformed/delayed/duplicated/unavailable responses.
-- Correlation IDs preserved.
-
-### CLI / Workers / Batch
-- Meaningful exit codes.
-- Safe retries, resumability, progress reporting.
-- Bounded resource usage, idempotent processing.
-
-### Security-sensitive
-- Route to `9-security`. Verify threat model, trust boundaries, abuse cases, secrets scan.
-
-### Deployment / Infrastructure
-- Route to `10-release`. Verify CI gates, rollout, rollback, observability.
-
 ## Evidence format
 
 Every gate item must link to evidence. No evidence = not verified.
@@ -134,4 +99,8 @@ Do not mark a gate complete without evidence. If a gate cannot be verified, reco
 
 ## Routing
 
-Missing evidence → return to `5-build`. Security/deploy gates → `9-security` / `10-release`. Test coverage gaps → `11-test-strategy`.
+Select gates proportionally to task type and risk. Verification evidence supports review; it does not accept the task or authorize the next task.
+
+After verification, report `Result`, `Next step`, `Command`, and `Approval`. If evidence is complete, recommend the developer's acceptance or stage-close decision; if evidence is missing, recommend `5-build` with `Invoke skill `5-build``. Do not mark a task done or close a stage autonomously.
+
+Missing evidence → report it and propose returning to `5-build`; do not route yourself. Security/deploy gates → `9-security` / `10-release`. Test coverage gaps → `11-test-strategy`.

@@ -6,7 +6,7 @@
 
 ## Prerequisites
 - [ ] All CI/CD gates pass (lint, typecheck, tests, build, migration checks, security scan).
-- [ ] All `8-verify` quality gates pass with evidence recorded in `project/checklist.md`.
+- [ ] All `8-verify` quality gates pass with evidence recorded in the task's `Evidence` field (or `project/checklist.md` for ad-hoc work).
 - [ ] Rollout strategy approved.
 - [ ] Rollback procedure documented and tested.
 - [ ] Observability signals verified (logs, metrics, health checks, alerts).
