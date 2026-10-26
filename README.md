@@ -113,13 +113,13 @@ Files are created as needed; not all exist initially.
 
 - `AGENTS.md` — shared agent instructions.
 - `CLAUDE.md` — optional Claude Code entry point.
-- `project/state.md` — current workflow status.
-- `project/context.md` — project context and constraints.
-- `project/decisions.md` — accepted decisions.
-- `project/backlog.md` — deferred work.
-- `project/scope.md`, `prd.md`, `roadmap.md` — project definition and planning.
-- `project/stages/` and `project/changes/` — stage and change specifications, plans, and tasks.
-- `project/.sync/` — snapshots for detecting changes.
+- `dev-workspace/state.json` — current workflow status.
+- `dev-workspace/project-context.md` — skill-pack project context and constraints.
+- `dev-workspace/decisions.md` — accepted decisions.
+- `dev-workspace/backlog.md` — deferred work.
+- `dev-workspace/scope.md`, `prd.md`, `roadmap.md` — skill-pack project definition and planning.
+- `dev-workspace/stages/` and `dev-workspace/changes/` — stage and change specifications, plans, and tasks.
+- `dev-workspace/.sync/` — snapshots for detecting changes.
 
 ## Autonomy and approvals
 

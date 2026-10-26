@@ -37,7 +37,7 @@ The risk level is proposed in the plan or task and confirmed by the developer. D
 
 ## Change type completion criteria
 
-Each change type has executable completion criteria. Copy the relevant gates into the task's acceptance and `Evidence` fields (or into `project/checklist.md` for ad-hoc work) and mark them done with evidence. Do not mark a gate complete without a command, test, manual check, or artifact as evidence.
+Each change type has executable completion criteria. Copy the relevant gates into the task's acceptance and `Evidence` fields (or into `dev-workspace/checklist.md` for ad-hoc work) and mark them done with evidence. Do not mark a gate complete without a command, test, manual check, or artifact as evidence.
 
 ### Frontend / UI
 - Component decomposition signals checked (size, nesting, mixed concerns).

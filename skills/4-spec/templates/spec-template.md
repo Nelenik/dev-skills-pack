@@ -54,6 +54,6 @@ Document NFRs with testable criteria:
 
 ## Decisions
 
-Link each consequential decision to an ADR in `project/adr/`. Use [templates/adr-template.md](templates/adr-template.md) as the starting structure.
+Link each consequential decision to an ADR in `dev-workspace/adr/`. Use [templates/adr-template.md](templates/adr-template.md) as the starting structure.
 
 ## Revisions

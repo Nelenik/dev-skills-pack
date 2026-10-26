@@ -10,7 +10,7 @@ Read approved project documents and inspect the actual repository.
 
 ## Location and scope
 
-Read `project/state.md`. In the `mvp` phase a spec belongs to the active roadmap stage and lives at `<work_dir>/spec-NN-<slug>.md` (`work_dir` comes from `state.md`, for example `project/stages/00-foundation/`). One stage may need several specs: split by independently reviewable concern when a single spec would be too large to review calmly, and state in each spec which exit criteria of the stage it serves. In the `evolve` phase the spec lives at `project/changes/<name>/spec.md`. Never write specs for stages that are not active.
+Read `dev-workspace/state.md`. In the `mvp` phase a spec belongs to the active roadmap stage and lives at `<work_dir>/spec-NN-<slug>.md` (`work_dir` comes from `state.md`, for example `dev-workspace/stages/00-foundation/`). One stage may need several specs: split by independently reviewable concern when a single spec would be too large to review calmly, and state in each spec which exit criteria of the stage it serves. In the `evolve` phase the spec lives at `dev-workspace/changes/<name>/spec.md`. Never write specs for stages that are not active.
 
 - The foundation stage spec defines the binding conventions: stack, folder structure, naming, state and data-fetching patterns, testing and styling conventions. After the developer approves it, propose adding them to `context.md` under "Binding conventions". Later specs must follow them; deviating needs an ADR and the developer's approval.
 - For a `partial` stage (code already exists), write a delta spec: current state, target state, and the difference. Do not redesign what already works.
@@ -53,7 +53,7 @@ Use [templates/adr-template.md](templates/adr-template.md) as the starting struc
 - **Risks and follow-ups:** What could go wrong? What should be monitored or revisited?
 
 ### ADR placement
-- Store ADRs in `project/adr/` as individual files (e.g. `project/adr/0001-use-postgres.md`).
+- Store ADRs in `dev-workspace/adr/` as individual files (e.g. `dev-workspace/adr/0001-use-postgres.md`).
 - Link each ADR from the `## Decisions` section of the spec file.
 - Reference ADRs in `6-plan` when the decision affects implementation slices.
 - Update an ADR (do not delete) when it is superseded; link the new ADR to the old one.

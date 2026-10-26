@@ -10,7 +10,7 @@ You implement tasks the developer approved. You do not decide what to build, in 
 
 ## Preconditions (check before editing anything)
 
-1. `project/state.md` exists and the detect step of `18-sync` found nothing unresolved.
+1. `dev-workspace/state.md` exists and the detect step of `18-sync` found nothing unresolved.
 2. The active work folder's `tasks.md` has file-level `status: approved`; the task's dependencies are `done`; its own status is `todo` or `in-progress`; and the developer explicitly told you to start that task. `approved` is never an individual task status.
 3. The parent spec and plan are `status: approved`.
 
@@ -23,7 +23,7 @@ If any condition is false, do not build. Say which one is missing and propose th
 3. Stop and ask instead of continuing when: another file must change, a dependency or generator is needed, the task is larger than described, the spec or plan looks wrong, or a requirement is ambiguous. Do not widen scope silently and do not "fix it quickly".
 4. Run the task's acceptance checks and the baseline gates for the current phase (`8-verify`, "Phase baseline"). Record the exact commands and real results in the task's `Evidence` field.
 5. Review your own diff: only whitelisted files, no secrets, no unrelated edits, no dead code, documentation and comments per the quality gate below.
-6. Set the task status to `review` (never `done`), update `tasks.md` and `state.md`, and park anything you noticed but did not do in `project/backlog.md`. Do not modify approved specs, plans, PRDs, or other documents under this administrative exception.
+6. Set the task status to `review` (never `done`), update `tasks.md` and `state.md`, and park anything you noticed but did not do in `dev-workspace/backlog.md`. Do not modify approved specs, plans, PRDs, or other documents under this administrative exception.
 7. Output the task report defined in `AGENTS.md` using `Result`, `Next step`, `Command`, and `Approval`, then stop. Do not start the next task or equate successful verification with developer acceptance. Do not commit unless the developer asked.
 
 ## Batch mode
@@ -32,7 +32,7 @@ Only when the developer names the tasks ("do T-04 to T-06"). Report after each t
 
 ## Ad-hoc mode
 
-Only when the developer explicitly asks for a small change outside the task list. For a local, reversible bug, use the short route: one-sentence intent, up to 3 implementation/test files, explicit "go", focused checks, and a concise report. Do not create PRD, roadmap, spec, or plan documents. The developer still chooses the mode and authorizes execution; the agent does not decide that a change is small enough. Use `project/checklist.md` ([templates/checklist-template.md](templates/checklist-template.md)) only when evidence needs to persist. If behavior, public contracts, data, security, infrastructure, or architecture is affected, stop and propose `17-tasks`, `4-spec`, or `6-plan` instead.
+Only when the developer explicitly asks for a small change outside the task list. For a local, reversible bug, use the short route: one-sentence intent, up to 3 implementation/test files, explicit "go", focused checks, and a concise report. Do not create PRD, roadmap, spec, or plan documents. The developer still chooses the mode and authorizes execution; the agent does not decide that a change is small enough. Use `dev-workspace/checklist.md` ([templates/checklist-template.md](templates/checklist-template.md)) only when evidence needs to persist. If behavior, public contracts, data, security, infrastructure, or architecture is affected, stop and propose `17-tasks`, `4-spec`, or `6-plan` instead.
 
 ## Deviations
 
@@ -137,7 +137,7 @@ Before completion, verify that documentation is synchronized with the code:
 
 ## Routing
 
-If requirements are unclear, stop and propose `2-scope` or `3-prd`. If technical decisions are missing, propose `4-spec`. If a task is bigger or riskier than described, stop and propose splitting it through `17-tasks` or revising `6-plan`. When a stage closes, `16-roadmap` updates `project/context.md`; there is no separate ship stage in this workflow.
+If requirements are unclear, stop and propose `2-scope` or `3-prd`. If technical decisions are missing, propose `4-spec`. If a task is bigger or riskier than described, stop and propose splitting it through `17-tasks` or revising `6-plan`. When a stage closes, `16-roadmap` updates `dev-workspace/context.md`; there is no separate ship stage in this workflow.
 
 ## Definition of Done
 
@@ -147,4 +147,4 @@ The agent sets a finished task to `review`; only the developer sets `done`. A ta
 
 The per-type gates (frontend/UI, backend/API, databases, integrations, CLI/workers, security, deployment) live in `8-verify`. Apply only those that the plan or task marks as relevant, at the tier that matches the phase (`8-verify`, "Phase baseline"), and record the evidence in the task's `Evidence` field.
 
-Resume from `project/state.md`, the active `tasks.md`, project documents, and git state. This skill is the execution path for approved tasks in every phase; it never selects the next task by itself.
+Resume from `dev-workspace/state.md`, the active `tasks.md`, project documents, and git state. This skill is the execution path for approved tasks in every phase; it never selects the next task by itself.

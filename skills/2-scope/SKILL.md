@@ -6,7 +6,7 @@ description: "Define or reshape product direction, boundaries, outcomes, and pri
 
 > Working agreement: `AGENTS.md` (dev-skills-pack block). Read it first if it is not already in context.
 
-Read `project/context.md` and inspect the repository first. This supports both new products and existing systems; preserve current behavior unless an intentional change is approved.
+Read `dev-workspace/context.md` and inspect the repository first. This supports both new products and existing systems; preserve current behavior unless an intentional change is approved.
 
 ## Discovery conversation
 
@@ -16,7 +16,7 @@ Use answers to ask adaptive follow-ups. Probe vague words such as “simple”, 
 
 Offer informed tradeoffs when useful, but do not choose product direction on the developer's behalf. Record their intent, decisions, assumptions, and unresolved questions separately.
 
-Write `project/scope.md` with `status: draft`, show consequential decisions, and set `status: approved` after clear approval. Record revisions instead of regenerating the document. Do not force a proof-of-concept boundary; use an appropriate release, milestone, or migration boundary.
+Write `dev-workspace/scope.md` with `status: draft`, show consequential decisions, and set `status: approved` after clear approval. Record revisions instead of regenerating the document. Do not force a proof-of-concept boundary; use an appropriate release, milestone, or migration boundary.
 
 Use [templates/scope-template.md](templates/scope-template.md) as the starting structure. Remove irrelevant sections, but do not leave misleading placeholders.
 

@@ -7,7 +7,7 @@ description: "Define and review user flows, information architecture, interactio
 
 Use for new or changed user-facing flows, forms, navigation, information architecture, and interaction behavior. Do not use for API-only or infrastructure work.
 
-Read `project/context.md` and the approved `project/prd.md` when present. Inspect the existing UI, routes, components, design conventions, and user-facing behavior before proposing changes.
+Read `dev-workspace/context.md` and the approved `dev-workspace/prd.md` when present. Inspect the existing UI, routes, components, design conventions, and user-facing behavior before proposing changes.
 
 For substantial changes, read [references/ux-methods.md](references/ux-methods.md) for research, journey mapping, and heuristic review guidance.
 
@@ -18,7 +18,7 @@ For substantial changes, read [references/ux-methods.md](references/ux-methods.m
 3. Specify all relevant states: initial, loading, empty, populated, invalid, error, unavailable, unauthorized, duplicated, interrupted, and recovered.
 4. Define keyboard, focus, screen-reader, touch, responsive, reduced-motion, and localization expectations appropriate to the product.
 5. Identify risky assumptions and validate them with the developer or existing product evidence; do not invent product behavior silently.
-6. Record the result in `project/ux-spec.md` using [templates/ux-spec-template.md](templates/ux-spec-template.md) when the change is non-trivial.
+6. Record the result in `dev-workspace/ux-spec.md` using [templates/ux-spec-template.md](templates/ux-spec-template.md) when the change is non-trivial.
 7. Define how the design will be validated: usability observation, analytics, support evidence, acceptance tests, or browser checks.
 
 ## Quality rules

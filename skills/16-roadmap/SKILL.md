@@ -8,7 +8,7 @@ description: "Create, reconstruct, and manage the MVP roadmap: broad stages with
 
 This skill plans the MVP in broad strokes and controls the stage lifecycle. It writes no code and no specs. Stages are decided with the developer; the agent proposes and records.
 
-Read `project/state.md`, `context.md`, `scope.md`, `prd.md`. Use [templates/roadmap-template.md](templates/roadmap-template.md) for `project/roadmap.md`. Lifecycle details (closing a stage, triaging requests, the MVP gate) are in [references/stage-lifecycle.md](references/stage-lifecycle.md).
+Read `dev-workspace/state.md`, `context.md`, `scope.md`, `prd.md`. Use [templates/roadmap-template.md](templates/roadmap-template.md) for `dev-workspace/roadmap.md`. Lifecycle details (closing a stage, triaging requests, the MVP gate) are in [references/stage-lifecycle.md](references/stage-lifecycle.md).
 
 ## Mode A — Create (new project)
 
@@ -39,7 +39,7 @@ Used by `1-start` recovery mode. Code is the source of truth.
 Only one stage is active. A new one may start only when the previous is `done` or the developer explicitly parks it.
 
 1. Propose the stage to activate; wait for the developer's explicit activation permission.
-2. Create `project/stages/<NN-name>/`, set in `state.md`: `stage`, `work_dir`, `spec: none`, `task: none`, `step: spec`; set the stage to `active` in `roadmap.md` only as the approved diff. The agent never independently changes a stage to `done`, `moved`, or `dropped`.
+2. Create `dev-workspace/stages/<NN-name>/`, set in `state.md`: `stage`, `work_dir`, `spec: none`, `task: none`, `step: spec`; set the stage to `active` in `roadmap.md` only as the approved diff. The agent never independently changes a stage to `done`, `moved`, or `dropped`.
 3. Propose `4-spec`. Specs, plans, and tasks for later stages must not exist yet.
 
 ## Rules

@@ -5,7 +5,7 @@ mode: bootstrap         # bootstrap | normal | recovery
 initialized: false      # false until the first project baseline is established
 stage: none             # active roadmap stage, e.g. 00-foundation (mvp phase)
 change: none            # active change folder name (evolve phase)
-work_dir: none          # e.g. project/stages/00-foundation or project/changes/add-search
+work_dir: none          # e.g. dev-workspace/stages/00-foundation or dev-workspace/changes/add-search
 spec: none              # active spec file inside work_dir
 task: none              # active task id, e.g. T-03
 step: idle              # idle | scope | prd | roadmap | spec | plan | tasks | check | build | verify | stage-close | sync
@@ -23,7 +23,7 @@ Manual changes or divergences found by `18-sync` that the developer has not reso
 
 ## Accepted working-tree snapshot
 
-The last developer-accepted uncommitted state. Store the manifest in `project/.sync/accepted-snapshot.md` and the accepted file contents or unified diff in the same directory. Each manifest entry is exactly `path | A/M/D | sha256 | content-ref`; for a deletion use `path | D | missing | content-ref` where `content-ref` points to the saved pre-deletion content. SHA-256 detects changes; it is not a substitute for the saved content or diff. Keep the baseline commit separately in `last_synced_commit`. Replace the manifest and snapshot contents together after each explicit acceptance; do not require a commit.
+The last developer-accepted uncommitted state. Store the manifest in `dev-workspace/.sync/accepted-snapshot.md` and the accepted file contents or unified diff in the same directory. Each manifest entry is exactly `path | A/M/D | sha256 | content-ref`; for a deletion use `path | D | missing | content-ref` where `content-ref` points to the saved pre-deletion content. SHA-256 detects changes; it is not a substitute for the saved content or diff. Keep the baseline commit separately in `last_synced_commit`. Replace the manifest and snapshot contents together after each explicit acceptance; do not require a commit.
 
 ## Parked
 

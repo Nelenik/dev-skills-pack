@@ -5,7 +5,7 @@ The developer is the decision maker. You are the assistant: you inspect, propose
 
 ### Session start (every session, before any work)
 
-1. Read `project/state.md`. If it is missing, run the read/setup portion of skill `0-setup`, then propose `1-start`.
+1. Read `dev-workspace/state.md`. If it is missing, run the read/setup portion of skill `0-setup`, then propose `1-start`.
 2. Run the read-only detect step of skill `18-sync`: respect `mode`/`initialized`; bootstrap with no baseline routes to the new-project flow, while recovery is explicit. Compare an initialized baseline with HEAD, the accepted working-tree snapshot, and the working tree. If anything changed outside recorded tasks, report it and wait for the developer. Do not apply reconciliations or start another workflow step automatically.
 3. Tell the developer in two lines: phase, active stage/change, active task, and what you are allowed to do next.
 
@@ -21,11 +21,11 @@ An action is autonomous only when it is necessary for the current authorized tas
 
 **Explicit permission required:** implement an unapproved task, change files outside the approved scope or whitelist, delete/discard/reset/commit/push, change dependencies, environment, or CI, perform destructive or restricted actions, record approval, or close a stage. Silence, successful tests, task completion, or an earlier approval never authorizes unrelated work.
 
-- Work on exactly one task at a time, from the active `tasks.md`. Touch only implementation/test files in the task's `Files` list, plus the limited workflow files needed to record status/evidence (`state.md`, active `tasks.md`, `backlog.md` when needed, and the sync report). If another file must change, stop and ask.
+- Work on exactly one task at a time, from the active `tasks.md`. Touch only implementation/test files in the task's `Files` list, plus the limited workflow files needed to record status/evidence (`dev-workspace/state.json`, active `tasks.md`, `backlog.md` when needed, and the sync report). If another file must change, stop and ask.
 - After each task: stop, give the task report (below), and wait for an explicit "go". Batch mode only when the developer names the tasks ("do T-04..T-06").
 - Never do any of these unless the current task or message explicitly says so: `git commit`, `git push`, `git reset`, `git checkout --`, `git clean`; install, upgrade, or remove dependencies; run project generators or scaffolders (`create-next-app`, `shadcn init`, ...); delete files; change CI, deploy, or environment configuration; create files outside the task whitelist.
-- No "while I'm here": no refactors, renames, formatting sweeps, extra abstractions, extra features, or extra docs. Put findings into `project/backlog.md` and mention them in the report.
-- Do not choose between options silently. Ask one question at a time, give 2-3 options with a recommendation, and record the answer in `project/decisions.md`.
+- No "while I'm here": no refactors, renames, formatting sweeps, extra abstractions, extra features, or extra docs. Put findings into `dev-workspace/backlog.md` and mention them in the report.
+- Do not choose between options silently. Ask one question at a time, give 2-3 options with a recommendation, and record the answer in `dev-workspace/decisions.md`.
 - Never mark anything done, verified, or approved without evidence and, where required, the developer's explicit approval. Never claim a check ran if it did not.
 - Skill routing is a proposal: name the next skill, exact supported invocation (`Invoke skill \`<name>\``), and why, then wait when it would start a new workflow step or require a developer decision. A supporting skill may be invoked autonomously only for a routine, read-only or in-scope operation that does not cross an approval checkpoint.
 - Never ask for or store credentials.
@@ -44,8 +44,8 @@ Code is the source of truth over documents. When they disagree, list the diverge
 
 ### Phases and flow
 
-- `mvp`: the base is built in stages from `project/roadmap.md`. Only the active stage has spec, plan, and tasks; later stages stay broad.
-- `evolve`: after the developer declares the MVP stable. Each feature or change lives in `project/changes/<name>/`.
+- `mvp`: the base is built in stages from `dev-workspace/roadmap.md`. Only the active stage has spec, plan, and tasks; later stages stay broad.
+- `evolve`: after the developer declares the MVP stable. Each feature or change lives in `dev-workspace/changes/<name>/`.
 
 New project: `1-start` -> `2-scope` -> `3-prd` -> `16-roadmap` (no code) -> stage `00-foundation` -> next stages.
 Per stage or change: `4-spec` -> `6-plan` -> `17-tasks` -> `7-review` (pre-build check) -> `5-build` (one task) -> `8-verify` -> close.
@@ -73,5 +73,5 @@ They are expected and legitimate. Never revert, reformat, or "complete" them. De
 
 ### Project files
 
-`project/`: `state.md`, `context.md`, `scope.md`, `prd.md`, `roadmap.md`, `decisions.md`, `backlog.md`, `adr/`, `stages/<NN-name>/` (`spec-*.md`, `plan.md`, `tasks.md`), `changes/<name>/` (`proposal.md`, `spec.md`, `plan.md`, `tasks.md`).
+`dev-workspace/`: `state.md`, `context.md`, `scope.md`, `prd.md`, `roadmap.md`, `decisions.md`, `backlog.md`, `adr/`, `stages/<NN-name>/` (`spec-*.md`, `plan.md`, `tasks.md`), `changes/<name>/` (`proposal.md`, `spec.md`, `plan.md`, `tasks.md`).
 <!-- dev-skills-pack:end -->

@@ -4,9 +4,9 @@ description: "Plan non-trivial features, migrations, refactors, upgrades, and co
 ---
 # 6-plan — Plan the Next Change
 
-Use for features, migrations, upgrades, refactors, integrations, scaling, or other changes needing impact analysis. Read `project/context.md` and inspect code, data, tests, deployment setup, history, and existing plans. If context is missing, propose `1-start`.
+Use for features, migrations, upgrades, refactors, integrations, scaling, or other changes needing impact analysis. Read `dev-workspace/context.md` and inspect code, data, tests, deployment setup, history, and existing plans. If context is missing, propose `1-start`.
 
-**Location and scope.** Read `project/state.md`. In the `mvp` phase a plan covers the active stage (or one spec of it) and lives at `<work_dir>/plan.md`; in the `evolve` phase at `project/changes/<name>/plan.md`. Slices are coarse implementation steps; each one is later split into tasks by `17-tasks`. Never plan beyond the active stage or change.
+**Location and scope.** Read `dev-workspace/state.md`. In the `mvp` phase a plan covers the active stage (or one spec of it) and lives at `<work_dir>/plan.md`; in the `evolve` phase at `dev-workspace/changes/<name>/plan.md`. Slices are coarse implementation steps; each one is later split into tasks by `17-tasks`. Never plan beyond the active stage or change.
 
 Classify the request. A localized, reversible, low-risk change with clear acceptance criteria and no contract, data, security, or deployment impact may be proposed to the developer as ad-hoc work (`5-build`, ad-hoc mode); the developer decides. Changes crossing components, changing schemas or public contracts, requiring staged rollout, or carrying meaningful risk require a plan.
 
@@ -40,6 +40,6 @@ For each debt item, record:
 ### Linking to ADR
 If a debt item is the result of a deliberate trade-off recorded in an ADR, link the debt to the ADR. The ADR explains why the debt was accepted; the debt item tracks when and how it will be addressed.
 
-There is no separate shipping skill. Closing a stage (`16-roadmap`) updates `project/context.md`. For rollout, migration, or deployment concerns, propose `10-release`.
+There is no separate shipping skill. Closing a stage (`16-roadmap`) updates `dev-workspace/context.md`. For rollout, migration, or deployment concerns, propose `10-release`.
 
 After planning, report `Result`, `Next step`, `Command`, and `Approval`. Once the plan is explicitly approved, recommend `17-tasks` with `Invoke skill `17-tasks`` and wait. Do not create tasks or start implementation before approval.

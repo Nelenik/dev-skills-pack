@@ -16,7 +16,7 @@ Clarify the developer's priorities, desired tone and interaction style, importan
 
 Do not invent screens, behavior, copy, user roles, or acceptance criteria. Within the agreed scope, make low-risk technical decisions autonomously, record the assumptions behind them, and ask the developer only when the uncertainty could materially affect the product, user experience, safety, compatibility, or scope. Convert the developer's answers into precise requirements while labeling agent-derived assumptions and asking about consequential gaps.
 
-Read [references/prd-guide.md](references/prd-guide.md) for interview and edge-case guidance. Use [templates/prd-template.md](templates/prd-template.md) when creating or restructuring `project/prd.md`.
+Read [references/prd-guide.md](references/prd-guide.md) for interview and edge-case guidance. Use [templates/prd-template.md](templates/prd-template.md) when creating or restructuring `dev-workspace/prd.md`.
 
 ## Requirement quality
 
@@ -54,6 +54,6 @@ Do not invent NFRs without a project reason. Mark unresolved NFRs as open questi
 
 Specify target users, journey, interfaces, behaviors, permissions, data visible to users, loading/empty/error states, acceptance criteria, operational needs, and deferred work. Acceptance criteria must be testable; use `11-test-strategy` for coverage.
 
-For existing products document current behavior, intended behavior, compatibility expectations, and rollout impact. Write or update `project/prd.md` with `status: draft`; mark assumptions and unresolved decisions. Set `status: approved` when behavior is clear enough for technical design. Purely internal changes belong in `6-plan`.
+For existing products document current behavior, intended behavior, compatibility expectations, and rollout impact. Write or update `dev-workspace/prd.md` with `status: draft`; mark assumptions and unresolved decisions. Set `status: approved` when behavior is clear enough for technical design. Purely internal changes belong in `6-plan`.
 
 After approval, report `Result`, `Next step`, `Command`, and `Approval`, then wait. Recommend `16-roadmap`, `4-spec`, or `6-plan` according to the state, using `Invoke skill `<name>``. Never start implementation from this skill.

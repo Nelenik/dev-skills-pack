@@ -10,7 +10,7 @@ Tasks are what the developer reviews. Each one must be small enough to read as a
 
 Task lifecycle is `todo → in-progress → review → done`: `todo` means ready but not started; `in-progress` requires explicit authorization; `review` means implementation and checks are complete and awaiting acceptance; `done` means the developer accepted the result. The agent never sets `done` or starts another task from `review`.
 
-Read `project/state.md`, then the approved spec(s) and plan in the active work folder. If any is not `status: approved`, stop and propose the skill that produces it. Decompose only the active stage or change. Use [templates/tasks-template.md](templates/tasks-template.md) for `<work_dir>/tasks.md`.
+Read `dev-workspace/state.md`, then the approved spec(s) and plan in the active work folder. If any is not `status: approved`, stop and propose the skill that produces it. Decompose only the active stage or change. Use [templates/tasks-template.md](templates/tasks-template.md) for `<work_dir>/tasks.md`.
 
 ## How to decompose
 
