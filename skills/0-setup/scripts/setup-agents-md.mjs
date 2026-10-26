@@ -7,8 +7,9 @@
 // - CLAUDE.md that exists but does not import AGENTS.md -> appends a marked
 //   `@AGENTS.md` import (Claude Code reads CLAUDE.md, not AGENTS.md).
 //
-// Usage: node setup-agents-md.mjs [--cwd <dir>] [--dry-run] [--claude]
+// Usage: node setup-agents-md.mjs [--cwd <dir>] [--dry-run] [--check] [--claude]
 //   --dry-run  print what would happen, write nothing
+//   --check    validate AGENTS.md markers, write nothing
 //   --claude   also create CLAUDE.md with the import when it does not exist
 // Exit codes: 0 ok, 1 usage/IO error, 2 broken markers (file left untouched).
 
@@ -31,6 +32,7 @@ const opt = (name) => {
 };
 
 const dryRun = flag("--dry-run");
+const checkOnly = flag("--check");
 const cwd = path.resolve(opt("--cwd") ?? process.cwd());
 const here = path.dirname(fileURLToPath(import.meta.url));
 const blockPath = path.resolve(here, "../templates/agents-block.md");
@@ -65,8 +67,12 @@ const prefix = dryRun ? "[dry-run] " : "";
 
 // ---- AGENTS.md -----------------------------------------------------------
 if (!fs.existsSync(agentsFile)) {
+  if (checkOnly) {
+    console.log("AGENTS.md: missing; integrity check passed (setup may be needed).");
+  } else {
   write(agentsFile, block + "\n");
   console.log(`${prefix}AGENTS.md: created with dev-skills-pack block v${newVersion}.`);
+  }
 } else {
   const original = fs.readFileSync(agentsFile, "utf8");
   const eol = eolOf(original);
@@ -92,7 +98,9 @@ if (!fs.existsSync(agentsFile)) {
     process.exit(2);
   }
 
-  if (begin) {
+  if (checkOnly) {
+    console.log(begin ? "AGENTS.md: managed block is valid." : "AGENTS.md: managed block is missing; integrity check passed (setup may be needed).");
+  } else if (begin) {
     const start = begin.index;
     const stop = endIdx + END.length;
     if (stop <= start) {
@@ -115,6 +123,8 @@ if (!fs.existsSync(agentsFile)) {
     console.log(`${prefix}AGENTS.md: block v${newVersion} appended to the existing file (existing content untouched).`);
   }
 }
+
+if (checkOnly) process.exit(0);
 
 // ---- CLAUDE.md -----------------------------------------------------------
 const importBlock = `${IMPORT_BEGIN}\n@AGENTS.md\n${IMPORT_END}`;

@@ -4,7 +4,7 @@ description: "Establish or recover project context for a new or existing codebas
 ---
 # 1-start — Establish Project Context
 
-> Working agreement: `AGENTS.md` (dev-skills-pack block). If `AGENTS.md` lacks the block or `project/state.md` is missing, invoke `0-setup` automatically for its safe initialization operations. If setup reports a malformed or ambiguous managed block, stop and present its recovery recommendation.
+> Working agreement: `AGENTS.md` (dev-skills-pack block). Before deciding whether setup is needed, run the read-only `0-setup` marker check (`--check`); this validation is mandatory even when no setup appears necessary. If validation reports a malformed or ambiguous block, stop and present its recovery recommendation without modifying files or routing to another workflow. Only after integrity validation succeeds, if `AGENTS.md` lacks a valid block or `project/state.md` is missing, invoke `0-setup` automatically for its safe initialization operations.
 
 Use when the repository has no reliable context or its documentation is incomplete. Inspect structure, git status/history, manifests, entrypoints, tests, CI, deployment files, and existing docs before asking questions. Never assume the project is empty or overwrite existing context silently.
 
@@ -52,7 +52,7 @@ After inspection, report `Result`, `Next step`, `Command`, and `Approval`. Use `
 
 Supporting skills may run autonomously only when the shared autonomy criterion is satisfied: the operation is necessary for the current authorized task, in scope, does not alter approved decisions, and does not cross an approval checkpoint.
 
-When initialization is needed, `0-setup` is a routine supporting operation: it may create missing setup and tracking files, append a missing managed block, or update a valid managed block without an approval checkpoint. After setup reports its result, stop at this skill's existing routing decision; setup does not authorize planning, implementation, or another workflow step.
+At startup, keep two decisions separate: first validate managed-block integrity; then determine whether project setup is needed. When initialization is needed and validation succeeded, `0-setup` is a routine supporting operation: it may create missing setup and tracking files, append a missing managed block, or update a valid managed block without an approval checkpoint. After setup reports its result, stop at this skill's existing routing decision; setup does not authorize planning, implementation, or another workflow step.
 
 Routing is a proposal. Name the next skill and the reason, then wait for the developer. Never invoke the next skill on your own.
 
