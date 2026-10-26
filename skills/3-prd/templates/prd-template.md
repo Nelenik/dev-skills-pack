@@ -47,7 +47,7 @@ For each requirement, write acceptance criteria that are:
 - **Verifiable:** a command, test, or manual check can confirm the criterion passes.
 
 ### Edge cases and failure scenarios
-For each requirement, document at minimum:
+Use the following list as an applicability checklist for each requirement, not as a requirement to discuss every item with the developer. Mark scenarios that do not apply as such. Handle routine technical failures with a reasonable standard behavior; ask the developer only when the choice could materially affect the product or scope. For applicable scenarios, document at minimum:
 - Missing input.
 - Invalid input.
 - Empty data.

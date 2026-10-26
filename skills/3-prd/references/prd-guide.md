@@ -12,7 +12,7 @@ Convert intent into observable behavior. Prefer concrete outcomes over vague adj
 
 ## Edge cases
 
-Explore only the edge cases that could change implementation, trust, safety, or user experience. At minimum consider missing input, invalid input, empty data, slow dependencies, failed dependencies, retries, duplicate actions, permissions, interrupted work, and recovery when applicable.
+Use edge cases as an applicability checklist, not as a script requiring a separate discussion of every item. Consider missing input, invalid input, empty data, slow dependencies, failed dependencies, retries, duplicate actions, permissions, interrupted work, and recovery when applicable; mark irrelevant scenarios as not applicable. Handle routine technical failures with a reasonable standard behavior, and ask the developer only when the uncertainty could materially affect implementation, trust, safety, user experience, compatibility, or scope.
 
 ## Existing products
 

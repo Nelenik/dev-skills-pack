@@ -14,7 +14,7 @@ Treat the PRD as an interview, not a transcription task. Before writing requirem
 
 Clarify the developer's priorities, desired tone and interaction style, important examples, acceptance threshold, and tradeoffs between speed, simplicity, flexibility, automation, and control. Ask which edge cases matter for the first release and which can be deferred. For an existing product, compare current and intended behavior explicitly and identify compatibility expectations.
 
-Do not invent screens, behavior, copy, user roles, or acceptance criteria. Convert the developer's answers into precise requirements, while labeling agent-derived assumptions and asking about consequential gaps.
+Do not invent screens, behavior, copy, user roles, or acceptance criteria. Within the agreed scope, make low-risk technical decisions autonomously, record the assumptions behind them, and ask the developer only when the uncertainty could materially affect the product, user experience, safety, compatibility, or scope. Convert the developer's answers into precise requirements while labeling agent-derived assumptions and asking about consequential gaps.
 
 Read [references/prd-guide.md](references/prd-guide.md) for interview and edge-case guidance. Use [templates/prd-template.md](templates/prd-template.md) when creating or restructuring `project/prd.md`.
 
@@ -29,7 +29,7 @@ For each requirement, write acceptance criteria that are:
 - **Verifiable:** a command, test, or manual check can confirm the criterion passes.
 
 ### Edge cases and failure scenarios
-For each requirement, document at minimum:
+Use the following list as an applicability checklist for each requirement, not as a requirement to discuss every item with the developer. Mark scenarios that do not apply as such. Handle routine technical failures with a reasonable standard behavior; ask the developer only when the choice could materially affect the product or scope. For applicable scenarios, document at minimum:
 - Missing input.
 - Invalid input.
 - Empty data.
