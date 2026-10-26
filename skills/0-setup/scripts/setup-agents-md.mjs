@@ -17,6 +17,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const BEGIN_RE = /<!-- dev-skills-pack:begin( v(\d+))? -->/;
+const BEGIN_MARKER_RE = /<!--\s*dev-skills-pack:begin\b[^>]*-->/g;
+const END_MARKER_RE = /<!--\s*dev-skills-pack:end\s*-->/g;
 const END = "<!-- dev-skills-pack:end -->";
 const IMPORT_BEGIN = "<!-- dev-skills-pack:import:begin -->";
 const IMPORT_END = "<!-- dev-skills-pack:import:end -->";
@@ -69,8 +71,17 @@ if (!fs.existsSync(agentsFile)) {
   const original = fs.readFileSync(agentsFile, "utf8");
   const eol = eolOf(original);
   const text = original.replace(/\r\n/g, "\n");
-  const begin = text.match(BEGIN_RE);
-  const endIdx = text.indexOf(END);
+  const markerBegins = [...text.matchAll(BEGIN_MARKER_RE)];
+  const markerEnds = [...text.matchAll(END_MARKER_RE)];
+  const begins = [...text.matchAll(new RegExp(BEGIN_RE.source, "g"))];
+  const ends = markerEnds;
+  const begin = begins[0];
+  const endIdx = ends[0]?.index ?? -1;
+
+  if (markerBegins.length !== begins.length || begins.length > 1 || ends.length > 1) {
+    console.error("AGENTS.md has malformed or ambiguous dev-skills-pack markers. Fix it manually; nothing was changed.");
+    process.exit(2);
+  }
 
   if (begin && endIdx === -1) {
     console.error("AGENTS.md has a dev-skills-pack begin marker without an end marker. Fix it manually; nothing was changed.");
