@@ -26,13 +26,17 @@ Requires an approved `scope.md`; a `prd.md` is expected for user-facing products
 
 ## Mode B — Reconstruct (existing project, unfinished MVP)
 
-Used by `1-start` recovery mode. Code is the source of truth.
+Used by `1-start` recovery mode only when implementation or development history already exists and the project context must be reconstructed. Existing workflow documents without implementation remain in bootstrap resume, not recovery. Code is the source of truth for implemented behavior.
 
 1. Inspect the repository and any existing documents. Draft stages from the intended MVP (ask the developer when intent is not visible in artifacts).
 2. For each stage propose `done`, `partial`, or `not started`, with evidence in the `Evidence` field: files, routes, tests, runnable commands. When evidence is weak, propose `partial`, never `done`.
 3. List divergences between documents and code (see `18-sync`) without rewriting anything.
 4. The developer confirms every stage status one by one. Do not change code during reconstruction.
 5. Propose activating the first non-`done` stage. Specs and tasks for a `partial` stage describe only the difference between what exists and the exit criteria (`4-spec`, `17-tasks` with `finish` and `adopt` task types).
+
+## Bootstrap resume
+
+When invoked for a new project whose bootstrap was interrupted, do not reconstruct implementation stages. Read the saved workflow state and existing drafts, preserve their statuses, and continue the unmet bootstrap prerequisite. Use Create mode only after the approved scope and PRD prerequisites are satisfied; do not infer completion from the mere existence of a document.
 
 ## Activate a stage
 

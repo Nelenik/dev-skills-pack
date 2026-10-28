@@ -28,6 +28,12 @@ Do not turn this into a fixed questionnaire. Skip questions already answered, as
 
 For an existing project, inspect the repository first and ask only about intent that cannot be established from artifacts: what should change, what must not change, who is affected, and what constraints or risks matter.
 
+## Bootstrap resume
+
+When `dev-workspace/state.md` contains `mode: bootstrap` and `initialized: false`, treat the workflow as a potentially interrupted bootstrap. Read the saved `step`, `stage`, `work_dir`, and `task` values when present, then inspect the existing `context.md`, `scope.md`, `prd.md`, `roadmap.md`, and other workflow artifacts before choosing the next action. Existing workflow documents are evidence of progress, not proof that their stages are approved or complete.
+
+If workflow artifacts exist but the repository has no implementation yet, remain in bootstrap; do not switch to recovery solely because documents exist. Resume from the last confirmed step, preserve existing drafts and approvals, and do not repeat discovery or recreate documents unless a concrete gap requires it. If the saved state contradicts the artifacts and the contradiction cannot be resolved safely, report the specific conflict and ask one focused question.
+
 For a new project, keep `mode: bootstrap` and `initialized: false` until the initial context and baseline are established. Do not enter recovery merely because `last_synced_commit` is `none`. Set `mode: recovery` only when code or development history already exists and the project context must be reconstructed.
 
 Write `dev-workspace/context.md` with purpose, users, current status, capabilities, constraints, repository map, run/test/deploy entrypoints, risks, open questions, near-term direction, non-goals, and binding conventions (rules later specs must follow; empty until a foundation spec is approved). Link to `scope.md`, `prd.md`, `roadmap.md`, and active specs, plans, and tasks when present. Version public technical context; ignore only genuinely private context. Never request credentials.
@@ -38,7 +44,7 @@ Use [templates/context-template.md](templates/context-template.md) when creating
 
 ## Recovery mode (existing project, possibly an unfinished MVP)
 
-Use when code exists but project documents are missing, partial, or stale, or when this workflow is adopted midway.
+Use when code or development history exists but project documents are missing, partial, or stale, or when this workflow is adopted midway. Do not use recovery merely because `scope.md`, `prd.md`, `roadmap.md`, or `context.md` exist.
 
 1. Set `mode: recovery` in `dev-workspace/state.md` (create it through `0-setup` if missing).
 2. Inspect first, ask later. Read the code, git history, tests, and existing documents. Code is the source of truth over documents. Do not change any code.
