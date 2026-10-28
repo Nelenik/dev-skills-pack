@@ -33,8 +33,7 @@ Rules later specs and tasks must follow (stack, structure, naming, data fetching
 | Document | Authoritative for | Last reviewed | Notes |
 |---|---|---|---|
 | `context.md` | Current project state and risks | YYYY-MM-DD | |
-| `scope.md` | Direction and boundaries | YYYY-MM-DD | |
-| `prd.md` | User-facing behavior | YYYY-MM-DD | |
+| `prd.md` | Product direction, scope, and user-facing behavior | YYYY-MM-DD | |
 | `roadmap.md` | MVP stages and their status | YYYY-MM-DD | |
 | `spec-*.md` (`spec.md` in a change) | Technical design and contracts | YYYY-MM-DD | |
 | `plan.md` | Current stage or change sequence | YYYY-MM-DD | |

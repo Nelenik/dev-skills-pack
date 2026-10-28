@@ -5,7 +5,7 @@ description: "Design or improve production web UI visual direction, design token
 
 # 14-ui-design — UI Design
 
-Use when creating or changing pages, components, design systems, responsive layouts, typography, color, spacing, motion, or visual hierarchy. This skill owns visual and component decisions; product behavior belongs to `3-prd` or `13-ux-design`.
+Use when creating or changing pages, components, design systems, responsive layouts, typography, color, spacing, motion, or visual hierarchy. This skill owns visual and component decisions; product behavior belongs to `2-prd` or `13-ux-design`.
 
 Read `dev-workspace/context.md`, the relevant PRD/UX spec, and existing component and styling conventions. Reuse the project's design system before introducing new patterns.
 

@@ -72,7 +72,7 @@ Project files—not conversation history—are the persistent source of context.
 
 ### New project
 
-`0-setup` → `1-start` → `2-scope` → `3-prd` → `16-roadmap`
+`0-setup` → `1-start` → `2-prd` → `16-roadmap`
 
 Define the project, requirements, and development stages before implementation.
 
@@ -100,7 +100,7 @@ Invoke `18-sync`. It detects differences without modifying files. Review the fin
 |---|---|
 | `0-setup` | Initialize workflow instructions and project tracking |
 | `1-start` | Resume a session and identify the next action |
-| `2-scope`, `3-prd` | Define project boundaries and requirements |
+| `2-prd` | Define project boundaries and requirements |
 | `4-spec`, `6-plan`, `17-tasks` | Specify and plan work |
 | `7-review`, `5-build`, `8-verify` | Review, implement, and verify |
 | `16-roadmap` | Plan and track development stages |
@@ -117,7 +117,7 @@ Files are created as needed; not all exist initially.
 - `dev-workspace/project-context.md` — skill-pack project context and constraints.
 - `dev-workspace/decisions.md` — accepted decisions.
 - `dev-workspace/backlog.md` — deferred work.
-- `dev-workspace/scope.md`, `prd.md`, `roadmap.md` — skill-pack project definition and planning.
+- `dev-workspace/prd.md`, `roadmap.md` — skill-pack project definition and planning.
 - `dev-workspace/stages/` and `dev-workspace/changes/` — stage and change specifications, plans, and tasks.
 - `dev-workspace/.sync/` — snapshots for detecting changes.
 

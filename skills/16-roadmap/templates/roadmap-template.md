@@ -9,7 +9,7 @@ updated: YYYY-MM-DD
 
 ## MVP definition
 
-One short paragraph from `scope.md`: what must work for this to count as a stable MVP, and what is explicitly out.
+One short paragraph from the PRD Scope section: what must work for this to count as a stable MVP, and what is explicitly out.
 
 ## Stages
 

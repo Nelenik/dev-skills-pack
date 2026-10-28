@@ -60,4 +60,4 @@ Use [templates/adr-template.md](templates/adr-template.md) as the starting struc
 
 Write the spec file with `status: draft`; explain tradeoffs and resolve consequential unknowns. Set `status: approved` only after the developer's explicit approval. Whether a spec can be skipped for a small change is the developer's decision: propose skipping with the reason, never skip on your own. For security-sensitive or data-heavy designs, propose `9-security`.
 
-After approval, report `Result`, `Next step`, `Command`, and `Approval`, then recommend `6-plan` with `Invoke skill `6-plan`` and wait. Return to `3-prd` if the design exposes unresolved product behavior.
+After approval, report `Result`, `Next step`, `Command`, and `Approval`, then recommend `6-plan` with `Invoke skill `6-plan`` and wait. Return to `2-prd` if the design exposes unresolved product behavior.

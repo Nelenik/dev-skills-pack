@@ -33,4 +33,4 @@ For substantial changes, read [references/ux-methods.md](references/ux-methods.m
 
 ## Routing
 
-Unclear product behavior → `2-scope` or `3-prd`. Technical implications → `4-spec` or `6-plan`. Visual implementation → `14-ui-design` and `5-build`. Browser and accessibility validation → `15-ui-verify` and `8-verify`.
+Unclear product behavior → `2-prd`. Technical implications → `4-spec` or `6-plan`. Visual implementation → `14-ui-design` and `5-build`. Browser and accessibility validation → `15-ui-verify` and `8-verify`.

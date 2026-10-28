@@ -109,7 +109,7 @@ If implementation contradicts the plan, inspect downstream impact, update only a
 Keep the documents aligned with the code and with each other:
 
 - `context.md`: current status, capabilities, architecture map, risks, and links;
-- `scope.md`: product direction, boundaries, priorities, and non-goals;
+- PRD Scope section: product direction, boundaries, priorities, and non-goals;
 - `prd.md`: user-facing behavior and acceptance criteria;
 - `spec.md`: technical design, contracts, data, and operational decisions;
 - `roadmap.md`: stages and their status (developer-controlled);
@@ -137,7 +137,7 @@ Before completion, verify that documentation is synchronized with the code:
 
 ## Routing
 
-If requirements are unclear, stop and propose `2-scope` or `3-prd`. If technical decisions are missing, propose `4-spec`. If a task is bigger or riskier than described, stop and propose splitting it through `17-tasks` or revising `6-plan`. When a stage closes, `16-roadmap` updates `dev-workspace/context.md`; there is no separate ship stage in this workflow.
+If requirements are unclear, stop and propose `2-prd`. If technical decisions are missing, propose `4-spec`. If a task is bigger or riskier than described, stop and propose splitting it through `17-tasks` or revising `6-plan`. When a stage closes, `16-roadmap` updates `dev-workspace/context.md`; there is no separate ship stage in this workflow.
 
 ## Definition of Done
 

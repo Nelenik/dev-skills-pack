@@ -47,7 +47,7 @@ Code is the source of truth over documents. When they disagree, list the diverge
 - `mvp`: the base is built in stages from `dev-workspace/roadmap.md`. Only the active stage has spec, plan, and tasks; later stages stay broad.
 - `evolve`: after the developer declares the MVP stable. Each feature or change lives in `dev-workspace/changes/<name>/`.
 
-New project: `1-start` -> `2-scope` -> `3-prd` -> `16-roadmap` (no code) -> stage `00-foundation` -> next stages.
+New project: `1-start` -> `2-prd` -> `16-roadmap` (no code) -> stage `00-foundation` -> next stages.
 Per stage or change: `4-spec` -> `6-plan` -> `17-tasks` -> `7-review` (pre-build check) -> `5-build` (one task) -> `8-verify` -> close.
 Existing project: `1-start` (recovery) -> `16-roadmap` (reconstruct) -> continue with the first unfinished stage.
 
@@ -73,5 +73,5 @@ They are expected and legitimate. Never revert, reformat, or "complete" them. De
 
 ### Project files
 
-`dev-workspace/`: `state.md`, `context.md`, `scope.md`, `prd.md`, `roadmap.md`, `decisions.md`, `backlog.md`, `adr/`, `stages/<NN-name>/` (`spec-*.md`, `plan.md`, `tasks.md`), `changes/<name>/` (`proposal.md`, `spec.md`, `plan.md`, `tasks.md`).
+`dev-workspace/`: `state.md`, `context.md`, `prd.md`, `roadmap.md`, `decisions.md`, `backlog.md`, `adr/`, `stages/<NN-name>/` (`spec-*.md`, `plan.md`, `tasks.md`), `changes/<name>/` (`proposal.md`, `spec.md`, `plan.md`, `tasks.md`).
 <!-- dev-skills-pack:end -->

@@ -8,11 +8,11 @@ description: "Create, reconstruct, and manage the MVP roadmap: broad stages with
 
 This skill plans the MVP in broad strokes and controls the stage lifecycle. It writes no code and no specs. Stages are decided with the developer; the agent proposes and records.
 
-Read `dev-workspace/state.md`, `context.md`, `scope.md`, `prd.md`. Use [templates/roadmap-template.md](templates/roadmap-template.md) for `dev-workspace/roadmap.md`. Lifecycle details (closing a stage, triaging requests, the MVP gate) are in [references/stage-lifecycle.md](references/stage-lifecycle.md).
+Read `dev-workspace/state.md`, `context.md`, and the approved `prd.md`. Use [templates/roadmap-template.md](templates/roadmap-template.md) for `dev-workspace/roadmap.md`. Lifecycle details (closing a stage, triaging requests, the MVP gate) are in [references/stage-lifecycle.md](references/stage-lifecycle.md).
 
 ## Mode A — Create (new project)
 
-Requires an approved `scope.md`; a `prd.md` is expected for user-facing products. If missing, route back instead of inventing them.
+Requires an approved `prd.md` containing the product goal, boundaries, and requirements relevant to the roadmap. If missing or not approved, route back to `2-prd` instead of inventing them.
 
 1. Interview the developer, one question at a time: what the first runnable thing is, what the sensible order of capabilities is, what must exist before what, what can wait, what feels risky, how large a step they want to review.
 2. Propose the stages in broad strokes. Rules:

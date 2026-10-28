@@ -24,13 +24,13 @@ For a new project, do not write `context.md` from the first idea description alo
 - important constraints: platform, integrations, data, privacy, performance, budget, timeline, or compliance;
 - what is known, assumed, uncertain, or explicitly out of scope.
 
-Do not turn this into a fixed questionnaire. Skip questions already answered, ask deeper follow-ups when an answer is vague or consequential, and stop when the project direction, primary workflow, boundaries, and constraints are clear enough for `2-scope`. The goal is a usable working picture, not a polished specification.
+Do not turn this into a fixed questionnaire. Skip questions already answered, ask deeper follow-ups when an answer is vague or consequential, and stop when the project direction, primary workflow, boundaries, and constraints are clear enough for `2-prd`. The goal is a usable working picture, not a polished specification.
 
 For an existing project, inspect the repository first and ask only about intent that cannot be established from artifacts: what should change, what must not change, who is affected, and what constraints or risks matter.
 
 ## Bootstrap resume
 
-When `dev-workspace/state.md` contains `mode: bootstrap` and `initialized: false`, treat the workflow as a potentially interrupted bootstrap. Read the saved `step`, `stage`, `work_dir`, and `task` values when present, then inspect the existing `context.md`, `scope.md`, `prd.md`, `roadmap.md`, and other workflow artifacts before choosing the next action. Existing workflow documents are evidence of progress, not proof that their stages are approved or complete.
+When `dev-workspace/state.md` contains `mode: bootstrap` and `initialized: false`, treat the workflow as a potentially interrupted bootstrap. Read the saved `step`, `stage`, `work_dir`, and `task` values when present, then inspect the existing `context.md`, `prd.md`, `roadmap.md`, and any legacy `scope.md` alongside other workflow artifacts before choosing the next action. Existing workflow documents are evidence of progress, not proof that their stages are approved or complete.
 
 If workflow artifacts exist but the repository has no implementation yet, remain in bootstrap; do not switch to recovery solely because documents exist. Resume from the last confirmed step, preserve existing drafts and approvals, and do not repeat discovery or recreate documents unless a concrete gap requires it. If the saved state contradicts the artifacts and the contradiction cannot be resolved safely, report the specific conflict and ask one focused question.
 
@@ -44,14 +44,14 @@ Use [templates/context-template.md](templates/context-template.md) when creating
 
 ## Recovery mode (existing project, possibly an unfinished MVP)
 
-Use when code or development history exists but project documents are missing, partial, or stale, or when this workflow is adopted midway. Do not use recovery merely because `scope.md`, `prd.md`, `roadmap.md`, or `context.md` exist.
+Use when code or development history exists but project documents are missing, partial, or stale, or when this workflow is adopted midway. Do not use recovery merely because `prd.md`, `roadmap.md`, or `context.md` exist.
 
 1. Set `mode: recovery` in `dev-workspace/state.md` (create it through `0-setup` if missing).
 2. Inspect first, ask later. Read the code, git history, tests, and existing documents. Code is the source of truth over documents. Do not change any code.
 3. List divergences between documents and code (see `18-sync`, "Document vs code divergence") as a numbered list. The developer decides per item whether to update the document or change the code. Do not rewrite documents before that.
 4. Ask only what artifacts cannot tell: the intended MVP, what counts as finished, what must not change.
 5. Write or update `dev-workspace/context.md` from observations, keeping observations, developer intent, and agent assumptions separate.
-6. After the developer confirms the context summary, propose the recovery completion transition. If `scope.md`, `prd.md`, and `roadmap.md` are already approved, preserve them and do not recreate them. Once the developer explicitly confirms the transition, set `initialized: true`, `mode: normal`, record `last_synced_commit` to the agreed baseline commit (or `none` when the developer explicitly chooses a no-commit baseline), and create/update accepted snapshots under `dev-workspace/.sync/`. Until that confirmation, recovery remains active and synchronization must not treat the project as initialized.
+6. After the developer confirms the context summary, propose the recovery completion transition. If `prd.md` and `roadmap.md` are already approved, preserve them and do not recreate them. If a legacy `scope.md` also exists, inspect and preserve it; do not merge or delete it automatically. Once the developer explicitly confirms the transition, set `initialized: true`, `mode: normal`, record `last_synced_commit` to the agreed baseline commit (or `none` when the developer explicitly chooses a no-commit baseline), and create/update accepted snapshots under `dev-workspace/.sync/`. Until that confirmation, recovery remains active and synchronization must not treat the project as initialized.
 7. Propose `16-roadmap` in reconstruct mode to establish which stages are done, partial, or not started.
 
 ## Routing
@@ -64,10 +64,10 @@ At startup, keep two decisions separate: first validate managed-block integrity;
 
 Routing is a proposal. Name the next skill and the reason, then wait for the developer. Never invoke the next skill on your own.
 
-- no clear product direction → propose `2-scope`;
-- new project with approved scope and PRD → propose `16-roadmap` (create mode); never go straight to building;
+- no clear product direction → propose `2-prd`;
+- new project with an approved PRD → propose `16-roadmap` (create mode); never go straight to building;
 - existing project with an unfinished MVP → propose `16-roadmap` (reconstruct mode);
-- project in the `evolve` phase and a user-facing change → `3-prd`, then `4-spec`;
+- project in the `evolve` phase and a user-facing change → `2-prd`, then `4-spec`;
 - technical change without product impact → `4-spec` or `6-plan`;
 - a small change the developer explicitly asks for → `5-build` in ad-hoc mode, only after the developer says "go".
 

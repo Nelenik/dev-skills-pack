@@ -5,7 +5,7 @@ Use only methods proportionate to the change. Do not invent research results.
 ## Evidence sources
 
 - Existing support issues, analytics, session observations, usability tests, and user interviews.
-- Product constraints and decisions recorded in `scope.md` or `prd.md`.
+- Product constraints and decisions recorded in the PRD, including its Scope section.
 - Current UI behavior and patterns in the repository.
 
 ## Useful methods
