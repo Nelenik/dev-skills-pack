@@ -64,7 +64,7 @@ At the beginning of **every new coding session**, invoke:
 Invoke skill `1-start`
 ```
 
-The agent checks the current workflow state and runs the read-only detection part of `18-sync`. It reports the current task, discrepancies, and recommended next action. If unexpected changes require a decision, it stops and asks before proceeding.
+The agent checks the current workflow state and runs the read-only detection part of `17-sync`. It reports the current task, discrepancies, and recommended next action. If unexpected changes require a decision, it stops and asks before proceeding.
 
 Project files—not conversation history—are the persistent source of context.
 
@@ -72,7 +72,7 @@ Project files—not conversation history—are the persistent source of context.
 
 ### New project
 
-`0-setup` → `1-start` → `2-prd` → `16-roadmap`
+`0-setup` → `1-start` → `2-prd` → `15-roadmap`
 
 Define the project, requirements, and development stages before implementation.
 
@@ -82,17 +82,17 @@ Run `0-setup` if the workflow is not configured, then invoke `1-start`. The agen
 
 ### Implement a stage or feature
 
-`4-spec` → `6-plan` → `17-tasks` → `7-review` → `5-build` → `8-verify`
+`3-spec` → `5-plan` → `16-tasks` → `6-review` → `4-build` → `7-verify`
 
 Approve the plan before implementation. The agent implements one approved task at a time and stops for review before continuing.
 
 ### Small change
 
-Request `5-build` in ad-hoc mode. Agree on task boundaries and permitted files before implementation.
+Request `4-build` in ad-hoc mode. Agree on task boundaries and permitted files before implementation.
 
 ### Synchronize after manual changes
 
-Invoke `18-sync`. It detects differences without modifying files. Review the findings and approve any reconciliation before changes are applied.
+Invoke `17-sync`. It detects differences without modifying files. Review the findings and approve any reconciliation before changes are applied.
 
 ## Key skills
 
@@ -101,11 +101,11 @@ Invoke `18-sync`. It detects differences without modifying files. Review the fin
 | `0-setup` | Initialize workflow instructions and project tracking |
 | `1-start` | Resume a session and identify the next action |
 | `2-prd` | Define project boundaries and requirements |
-| `4-spec`, `6-plan`, `17-tasks` | Specify and plan work |
-| `7-review`, `5-build`, `8-verify` | Review, implement, and verify |
-| `16-roadmap` | Plan and track development stages |
-| `18-sync` | Detect and reconcile project changes |
-| `9-security`–`15-ui-verify` | Specialized security, release, testing, incident, and UI workflows |
+| `3-spec`, `5-plan`, `16-tasks` | Specify and plan work |
+| `6-review`, `4-build`, `7-verify` | Review, implement, and verify |
+| `15-roadmap` | Plan and track development stages |
+| `17-sync` | Detect and reconcile project changes |
+| `8-security`–`14-ui-verify` | Specialized security, release, testing, incident, and UI workflows |
 
 ## Project files
 

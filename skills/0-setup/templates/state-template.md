@@ -19,7 +19,7 @@ Only the developer changes `phase`, accepts tasks, and closes stages. The agent 
 
 ## Pending triage
 
-Manual changes or divergences found by `18-sync` that the developer has not resolved yet. Empty when everything is synchronized.
+Manual changes or divergences found by `17-sync` that the developer has not resolved yet. Empty when everything is synchronized.
 
 ## Accepted working-tree snapshot
 

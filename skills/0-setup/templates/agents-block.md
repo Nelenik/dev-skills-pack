@@ -6,7 +6,7 @@ The developer is the decision maker. You are the assistant: you inspect, propose
 ### Session start (every session, before any work)
 
 1. Read `dev-workspace/state.md`. If it is missing, run the read/setup portion of skill `0-setup`, then propose `1-start`.
-2. Run the read-only detect step of skill `18-sync`: respect `mode`/`initialized`; bootstrap with no baseline routes to the new-project flow, while recovery is explicit. Compare an initialized baseline with HEAD, the accepted working-tree snapshot, and the working tree. If anything changed outside recorded tasks, report it and wait for the developer. Do not apply reconciliations or start another workflow step automatically.
+2. Run the read-only detect step of skill `17-sync`: respect `mode`/`initialized`; bootstrap with no baseline routes to the new-project flow, while recovery is explicit. Compare an initialized baseline with HEAD, the accepted working-tree snapshot, and the working tree. If anything changed outside recorded tasks, report it and wait for the developer. Do not apply reconciliations or start another workflow step automatically.
 3. Tell the developer in two lines: phase, active stage/change, active task, and what you are allowed to do next.
 
 ### Hard rules
@@ -47,9 +47,9 @@ Code is the source of truth over documents. When they disagree, list the diverge
 - `mvp`: the base is built in stages from `dev-workspace/roadmap.md`. Only the active stage has spec, plan, and tasks; later stages stay broad.
 - `evolve`: after the developer declares the MVP stable. Each feature or change lives in `dev-workspace/changes/<name>/`.
 
-New project: `1-start` -> `2-prd` -> `16-roadmap` (no code) -> stage `00-foundation` -> next stages.
-Per stage or change: `4-spec` -> `6-plan` -> `17-tasks` -> `7-review` (pre-build check) -> `5-build` (one task) -> `8-verify` -> close.
-Existing project: `1-start` (recovery) -> `16-roadmap` (reconstruct) -> continue with the first unfinished stage.
+New project: `1-start` -> `2-prd` -> `15-roadmap` (no code) -> stage `00-foundation` -> next stages.
+Per stage or change: `3-spec` -> `5-plan` -> `16-tasks` -> `6-review` (pre-build check) -> `4-build` (one task) -> `7-verify` -> close.
+Existing project: `1-start` (recovery) -> `15-roadmap` (reconstruct) -> continue with the first unfinished stage.
 
 Task size: at most 3 implementation/test files per task (tests count; workflow files used for status/evidence are separate and limited; lockfiles and generated files are listed but not counted). A larger implementation task needs a written reason under "Why more than 3 files" and the developer's approval.
 
@@ -61,7 +61,7 @@ On a scope, requirement, or verification failure: record completed changes; do n
 
 Closing a stage is a separate acceptance decision. Before proposing closure, verify every exit criterion, critical finding, runnable behavior, documentation alignment, explicit deferred work, and that later stages were not implemented early. The agent presents evidence; only the developer accepts closure and applies the roadmap/state update.
 
-Skills `9-security`, `10-release`, `11-test-strategy`, `12-incident` run when the developer asks or when the plan or tasks reference them, not on your initiative.
+Skills `8-security`, `9-release`, `10-test-strategy`, `11-incident` run when the developer asks or when the plan or tasks reference them, not on your initiative.
 
 ### Task report (after every task, then stop)
 
@@ -69,7 +69,7 @@ Task id and title / files changed with diff stat / what was done / checks run (c
 
 ### Manual edits by the developer
 
-They are expected and legitimate. Never revert, reformat, or "complete" them. Detect and triage them with skill `18-sync`.
+They are expected and legitimate. Never revert, reformat, or "complete" them. Detect and triage them with skill `17-sync`.
 
 ### Project files
 

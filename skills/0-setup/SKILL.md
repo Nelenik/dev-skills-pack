@@ -23,7 +23,7 @@ The skills installer (`npx skills add`) copies skills only. It does not touch `A
 
    If `node` is unavailable, do the same by hand from [templates/agents-block.md](templates/agents-block.md) following the rules above. Never edit text outside the markers.
 
-2. **Workflow state.** If `dev-workspace/state.md` is missing, create it from [templates/state-template.md](templates/state-template.md) with `phase: mvp`, `mode: bootstrap`, `initialized: false`, `step: idle`, `last_synced_commit: none`, and today's date. Do not guess the stage; `1-start` and `16-roadmap` fill it in. Create only the additional workflow artifacts needed by the current stage. Never overwrite existing workflow files or existing user content.
+2. **Workflow state.** If `dev-workspace/state.md` is missing, create it from [templates/state-template.md](templates/state-template.md) with `phase: mvp`, `mode: bootstrap`, `initialized: false`, `step: idle`, `last_synced_commit: none`, and today's date. Do not guess the stage; `1-start` and `15-roadmap` fill it in. Create only the additional workflow artifacts needed by the current stage. Never overwrite existing workflow files or existing user content.
 
 3. **Report** exactly what was created or changed using `Result`, `Next step`, `Command`, and `Approval`. For safe setup, say that no approval was required. If a malformed or ambiguous block, existing equivalent context directory, overwrite, deletion, outside-scope change, or other unsafe modification is needed, stop and request the relevant approval or recovery decision. Recommend `1-start` with `Invoke skill `1-start``; setup completion does not authorize starting that workflow.
 

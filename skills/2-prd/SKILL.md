@@ -14,7 +14,7 @@ Read `dev-workspace/context.md`, existing `dev-workspace/prd.md`, relevant proje
 
 Treat the work as an adaptive interview, not a transcription task. Ask focused questions, preferably one at a time, only where artifacts and the developer's intent do not answer them. Cover the product problem and business context, target users, desired outcome, core journey, user stories, functional behavior, boundaries, constraints, dependencies, success evidence, and unresolved questions as applicable.
 
-Do not invent product direction, screens, roles, copy, acceptance criteria, or metrics. Within the agreed scope, make low-risk technical decisions autonomously, record assumptions, and ask only when uncertainty could materially affect the product, user experience, safety, compatibility, or scope. Do not put detailed architecture or implementation decisions in the PRD; those belong in `4-spec`, `6-plan`, and tasks unless they are genuine product constraints.
+Do not invent product direction, screens, roles, copy, acceptance criteria, or metrics. Within the agreed scope, make low-risk technical decisions autonomously, record assumptions, and ask only when uncertainty could materially affect the product, user experience, safety, compatibility, or scope. Do not put detailed architecture or implementation decisions in the PRD; those belong in `3-spec`, `5-plan`, and tasks unless they are genuine product constraints.
 
 Use the following sections when relevant; do not force irrelevant sections:
 
@@ -44,4 +44,4 @@ For existing projects:
 - If only `scope.md` exists, use it as source material for the PRD without deleting or silently rewriting it.
 - If both exist, inspect both, identify overlap and contradictions, and propose a merge into `dev-workspace/prd.md`. Preserve both originals unchanged until the developer approves the migration. If approved requirements or scope change, the resulting PRD returns to `draft`.
 
-After approval, report `Result`, `Next step`, `Command`, and `Approval`, then wait. Recommend exactly one next action with `Invoke skill `<name>``: `16-roadmap` when product definition prerequisites are satisfied, `4-spec` or `6-plan` for an approved change, or this skill again when clarification remains. Never start implementation or the next consequential workflow step from this skill.
+After approval, report `Result`, `Next step`, `Command`, and `Approval`, then wait. Recommend exactly one next action with `Invoke skill `<name>``: `15-roadmap` when product definition prerequisites are satisfied, `3-spec` or `5-plan` for an approved change, or this skill again when clarification remains. Never start implementation or the next consequential workflow step from this skill.
