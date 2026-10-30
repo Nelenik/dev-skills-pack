@@ -6,6 +6,10 @@ updated: YYYY-MM-DD
 
 # Project Context
 
+## Product Intent
+
+What the developer wants to build or what problem the product should solve. Keep this grounded in developer-provided information; if unknown, state that discovery is incomplete.
+
 ## Purpose and Users
 
 ## Current Status
@@ -23,6 +27,8 @@ Rules later specs and tasks must follow (stack, structure, naming, data fetching
 ## Run, Test, and Deploy
 
 ## Risks, Technical Debt, and Open Questions
+
+Separate verified repository facts, developer-approved decisions, assumptions, and unresolved product questions.
 
 ## Near-term Direction
 

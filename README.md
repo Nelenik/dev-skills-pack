@@ -1,5 +1,7 @@
 # Dev Skills Pack
 
+Workspace contract: `0-setup` creates `dev-workspace/state.md`, `decisions.md`, and `backlog.md`. `1-start` owns `context.md`; `2-prd` owns `prd.md`; and `15-roadmap` owns `roadmap.md`.
+
 A workflow toolkit for AI coding agents. The developer controls requirements, architectural decisions, scope, and workflow transitions. The agent handles routine work within approved boundaries.
 
 ## Installation
@@ -113,8 +115,6 @@ Files are created as needed; not all exist initially.
 
 - `AGENTS.md` — shared agent instructions.
 - `CLAUDE.md` — optional Claude Code entry point.
-- `dev-workspace/state.json` — current workflow status.
-- `dev-workspace/project-context.md` — skill-pack project context and constraints.
 - `dev-workspace/decisions.md` — accepted decisions.
 - `dev-workspace/backlog.md` — deferred work.
 - `dev-workspace/prd.md`, `roadmap.md` — skill-pack project definition and planning.
